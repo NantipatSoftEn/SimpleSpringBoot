@@ -2,12 +2,14 @@ package com.example.simplespringboot.api;
 
 import com.example.simplespringboot.business.TestBusiness;
 import com.example.simplespringboot.exception.BaseException;
+import com.example.simplespringboot.exception.FileException;
 import com.example.simplespringboot.exception.UserException;
 import com.example.simplespringboot.model.MRegisterRequest;
 import com.example.simplespringboot.model.TestResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
@@ -48,5 +50,12 @@ public class TestApi {
     public ResponseEntity<String> register(@RequestBody MRegisterRequest request) throws BaseException {
         String res =  res = business.register(request);
         return ResponseEntity.ok(res);
+    }
+
+    @PostMapping
+    @RequestMapping("/upload")
+    public ResponseEntity<String> uploadProfilePicture(@RequestPart MultipartFile file) throws FileException {
+        String response = business.uploadProfilePicture(file);
+        return ResponseEntity.ok(response);
     }
 }
