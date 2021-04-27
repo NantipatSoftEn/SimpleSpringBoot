@@ -1,6 +1,7 @@
 package com.example.simplespringboot.api;
 
 import com.example.simplespringboot.business.ProductBusiness;
+import com.example.simplespringboot.exception.BaseException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,8 +18,8 @@ public class ProductApi {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<String> getProductById(@PathVariable("id") String id){
-        String res= business.getProductById(id);
+    public ResponseEntity<String> getProductById(@PathVariable("id") String id) throws BaseException {
+        String res= business. getProductById(id);
         return ResponseEntity.ok(res);
     }
 }

@@ -1,7 +1,7 @@
 package com.example.simplespringboot.exception;
 
 public class UserException extends BaseException {
-    public UserException(String code){
+     UserException(String code){
         super("user." + code);
     }
 
