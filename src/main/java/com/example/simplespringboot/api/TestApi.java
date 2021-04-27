@@ -1,6 +1,8 @@
 package com.example.simplespringboot.api;
 
 import com.example.simplespringboot.business.TestBusiness;
+import com.example.simplespringboot.exception.BaseException;
+import com.example.simplespringboot.exception.UserException;
 import com.example.simplespringboot.model.MRegisterRequest;
 import com.example.simplespringboot.model.TestResponse;
 import org.springframework.http.HttpStatus;
@@ -17,7 +19,7 @@ public class TestApi {
 //    @Autowired
 //    private TestBusiness business;
     // method 2 contructer Injection alt+enter
-    private  final TestBusiness business;
+    private final TestBusiness business;
 
     public TestApi(TestBusiness business) {
         this.business = business;
@@ -25,7 +27,7 @@ public class TestApi {
 
 
     @GetMapping
-    public TestResponse test(){
+    public TestResponse test() {
         TestResponse response = new TestResponse();
         response.setName("Army");
         response.setFood("rice");
@@ -34,7 +36,7 @@ public class TestApi {
 
     @GetMapping
     @RequestMapping("/2")
-    public  TestResponse test2(){
+    public TestResponse test2() {
         TestResponse response = new TestResponse();
         response.setName("Nat 2");
         response.setFood("KFC 2");
@@ -43,14 +45,8 @@ public class TestApi {
 
     @PostMapping
     @RequestMapping("/register")
-    public ResponseEntity<String> register(@RequestBody MRegisterRequest request){
-        String res = null;
-        try{
-            res = business.register(request);
-        } catch (IOException e){
-            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).build();
-        }
-
-         return ResponseEntity.ok(res);
+    public ResponseEntity<String> register(@RequestBody MRegisterRequest request) throws BaseException {
+        String res =  res = business.register(request);
+        return ResponseEntity.ok(res);
     }
 }
