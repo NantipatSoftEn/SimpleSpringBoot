@@ -2,6 +2,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+#     if production mode = none
   datasource:
     url: jdbc:postgresql://localhost:5432/backend
     username: postgres
