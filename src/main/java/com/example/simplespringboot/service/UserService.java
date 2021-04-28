@@ -30,6 +30,10 @@ public class UserService {
         if(Objects.isNull(name)){
             throw UserException.createNameNull();
         }
+        // write for make sure
+        if(repository.existsByEmail(email)){
+            throw  UserException.createEmailDuplicated();
+        }
 
         User entity =  new User();
         entity.setEmail(email);
