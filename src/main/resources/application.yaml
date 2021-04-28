@@ -1,6 +1,9 @@
 spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
   datasource:
-    url: jdbc:postgres://locahost:5432/backend
+    url: jdbc:postgresql://localhost:5432/backend
     username: postgres
     password: syspass
   servlet:
