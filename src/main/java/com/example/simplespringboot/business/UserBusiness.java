@@ -1,27 +1,27 @@
 package com.example.simplespringboot.business;
 
+import com.example.simplespringboot.entity.User;
 import com.example.simplespringboot.exception.FileException;
 import com.example.simplespringboot.exception.UserException;
 import com.example.simplespringboot.model.MRegisterRequest;
+import com.example.simplespringboot.service.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 
 @Service
-public class TestBusiness {
-    public  String register(MRegisterRequest request) throws UserException {
-        if(request == null){
-            throw UserException.requestNull();
-        }
+public class UserBusiness {
+    private  final UserService  userService;
 
-        if(request.getEmail()==null){
-            throw UserException.requestNull();
-        }
-        return request.getName() ;
+    public UserBusiness(UserService userService) {
+        this.userService = userService;
+    }
+
+    public  User register(MRegisterRequest request) throws UserException {
+        return userService.create(request.getEmail(),request.getPassword(),request.getName());
     }
 
     public  String uploadProfilePicture(MultipartFile file) throws FileException {

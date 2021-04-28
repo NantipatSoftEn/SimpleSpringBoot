@@ -1,29 +1,26 @@
 package com.example.simplespringboot.api;
 
-import com.example.simplespringboot.business.TestBusiness;
+import com.example.simplespringboot.business.UserBusiness;
+import com.example.simplespringboot.entity.User;
 import com.example.simplespringboot.exception.BaseException;
 import com.example.simplespringboot.exception.FileException;
-import com.example.simplespringboot.exception.UserException;
 import com.example.simplespringboot.model.MRegisterRequest;
 import com.example.simplespringboot.model.TestResponse;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-
 @RestController
-@RequestMapping("/test")
-public class TestApi {
+@RequestMapping("/user")
+public class UserApi {
 
     // method 1 Field Injection
 //    @Autowired
 //    private TestBusiness business;
     // method 2 contructer Injection alt+enter
-    private final TestBusiness business;
+    private final UserBusiness business;
 
-    public TestApi(TestBusiness business) {
+    public UserApi(UserBusiness business) {
         this.business = business;
     }
 
@@ -47,8 +44,8 @@ public class TestApi {
 
     @PostMapping
     @RequestMapping("/register")
-    public ResponseEntity<String> register(@RequestBody MRegisterRequest request) throws BaseException {
-        String res =  res = business.register(request);
+    public ResponseEntity<User> register(@RequestBody MRegisterRequest request) throws BaseException {
+        User res = business.register(request);
         return ResponseEntity.ok(res);
     }
 
