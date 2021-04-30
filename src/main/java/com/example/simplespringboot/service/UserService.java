@@ -3,17 +3,28 @@ package com.example.simplespringboot.service;
 import com.example.simplespringboot.entity.User;
 import com.example.simplespringboot.exception.UserException;
 import com.example.simplespringboot.repository.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class UserService {
     private  final UserRepository repository;
+    private final PasswordEncoder passwordEncoder;
 
-
-    public  UserService(UserRepository repository){
+    public  UserService(UserRepository repository, PasswordEncoder passwordEncoder){
         this.repository =  repository;
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    public Optional<User> findByEmail(String email) {
+        return repository.findByEmail(email);
+    }
+
+    public boolean matchPassword(String rawPassword,String encodedPassword){
+        return passwordEncoder.matches(rawPassword,encodedPassword);
     }
 
     public User create(String email, String password, String name) throws UserException {

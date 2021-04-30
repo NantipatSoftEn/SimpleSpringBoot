@@ -4,9 +4,8 @@ import com.example.simplespringboot.business.UserBusiness;
 import com.example.simplespringboot.entity.User;
 import com.example.simplespringboot.exception.BaseException;
 import com.example.simplespringboot.exception.FileException;
-import com.example.simplespringboot.model.MRegisterRequest;
-import com.example.simplespringboot.model.MRegisterResponse;
-import com.example.simplespringboot.model.TestResponse;
+import com.example.simplespringboot.model.*;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,22 +24,10 @@ public class UserApi {
         this.business = business;
     }
 
-
-    @GetMapping
-    public TestResponse test() {
-        TestResponse response = new TestResponse();
-        response.setName("Army");
-        response.setFood("rice");
-        return response;
-    }
-
-    @GetMapping
-    @RequestMapping("/2")
-    public TestResponse test2() {
-        TestResponse response = new TestResponse();
-        response.setName("Nat 2");
-        response.setFood("KFC 2");
-        return response;
+    @PostMapping("/login")
+    public ResponseEntity<MLoginResponse> login(@RequestBody MLoginRequest request) throws BaseException {
+        MLoginResponse  response = business.login(request);
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping

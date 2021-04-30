@@ -1,5 +1,7 @@
 package com.example.simplespringboot.exception;
 
+import com.example.simplespringboot.entity.User;
+
 public class UserException extends BaseException {
      UserException(String code){
         super("user." + code);
@@ -29,5 +31,12 @@ public class UserException extends BaseException {
         return new UserException("create.name.null");
     }
 
+    public static UserException loginFailEmailNotFound(){
+         return new UserException("login.fail.email");
+    }
+
+    public static UserException loginFailPasswordIncorrect(){
+         return new UserException("login.fail.password");
+    }
 
 }
