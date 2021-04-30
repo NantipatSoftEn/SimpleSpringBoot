@@ -7,3 +7,14 @@ services:
       POSTGRES_PASSWORD: syspass
     ports:
       - 5432:5432
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@inw.com
+      PGADMIN_DEFAULT_PASSWORD: root
+      PGADMIN_LISTEN_PORT: 80
+    ports:
+      - "8080:80"
+    links:
+      - "db:pgsql-server"
