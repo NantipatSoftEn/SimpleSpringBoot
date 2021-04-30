@@ -5,6 +5,7 @@ import com.example.simplespringboot.entity.User;
 import com.example.simplespringboot.exception.BaseException;
 import com.example.simplespringboot.exception.FileException;
 import com.example.simplespringboot.model.MRegisterRequest;
+import com.example.simplespringboot.model.MRegisterResponse;
 import com.example.simplespringboot.model.TestResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -44,8 +45,8 @@ public class UserApi {
 
     @PostMapping
     @RequestMapping("/register")
-    public ResponseEntity<User> register(@RequestBody MRegisterRequest request) throws BaseException {
-        User res = business.register(request);
+    public ResponseEntity<MRegisterResponse> register(@RequestBody MRegisterRequest request) throws BaseException {
+        MRegisterResponse res = business.register(request);
         return ResponseEntity.ok(res);
     }
 

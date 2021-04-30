@@ -1,6 +1,11 @@
 package com.example.simplespringboot.mapper;
 
+import com.example.simplespringboot.entity.User;
+import com.example.simplespringboot.model.MRegisterRequest;
+import com.example.simplespringboot.model.MRegisterResponse;
+import org.mapstruct.Mapper;
 
-public class UserMapper {
-
+@Mapper(componentModel ="spring")
+public interface UserMapper {
+    MRegisterResponse toRegisTerResponse(User user);
 }

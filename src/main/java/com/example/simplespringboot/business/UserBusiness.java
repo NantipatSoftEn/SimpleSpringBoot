@@ -3,7 +3,9 @@ package com.example.simplespringboot.business;
 import com.example.simplespringboot.entity.User;
 import com.example.simplespringboot.exception.FileException;
 import com.example.simplespringboot.exception.UserException;
+import com.example.simplespringboot.mapper.UserMapper;
 import com.example.simplespringboot.model.MRegisterRequest;
+import com.example.simplespringboot.model.MRegisterResponse;
 import com.example.simplespringboot.service.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,13 +17,17 @@ import java.util.List;
 @Service
 public class UserBusiness {
     private  final UserService  userService;
-
-    public UserBusiness(UserService userService) {
+    private  final UserMapper userMapper;
+    public UserBusiness(UserService userService, UserMapper userMapper) {
         this.userService = userService;
+        this.userMapper = userMapper;
     }
 
-    public  User register(MRegisterRequest request) throws UserException {
-        return userService.create(request.getEmail(),request.getPassword(),request.getName());
+    public MRegisterResponse register(MRegisterRequest request) throws UserException {
+        User user =  userService.create(request.getEmail(),request.getPassword(),request.getName());
+         return userMapper.toRegisTerResponse(user);
+
+
     }
 
     public  String uploadProfilePicture(MultipartFile file) throws FileException {
