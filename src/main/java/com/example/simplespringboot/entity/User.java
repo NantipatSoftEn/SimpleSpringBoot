@@ -17,5 +17,7 @@ public class User extends  BaseEntity {
     @Column(nullable = false,length = 120)
     private String name;
     private String civilId;
+    @OneToOne(mappedBy = "user")
+    private Social social;
 }
 

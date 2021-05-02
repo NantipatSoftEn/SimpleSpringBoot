@@ -27,7 +27,7 @@ public class UserBusiness {
         this.userMapper = userMapper;
     }
 
-    public MLoginResponse login(MLoginRequest request) throws UserException {
+    public String login(MLoginRequest request) throws UserException {
 
         MLoginResponse m = new MLoginResponse();
         Optional<User>  opt = userService.findByEmail(request.getEmail());
@@ -42,7 +42,7 @@ public class UserBusiness {
         }
 
         String token = "JWT to do";
-        return m;
+        return token;
 
 
     }

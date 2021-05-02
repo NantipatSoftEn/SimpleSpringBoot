@@ -25,8 +25,8 @@ public class UserApi {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<MLoginResponse> login(@RequestBody MLoginRequest request) throws BaseException {
-        MLoginResponse  response = business.login(request);
+    public ResponseEntity<String> login(@RequestBody MLoginRequest request) throws BaseException {
+        String  response = business.login(request);
         return ResponseEntity.ok(response);
     }
 

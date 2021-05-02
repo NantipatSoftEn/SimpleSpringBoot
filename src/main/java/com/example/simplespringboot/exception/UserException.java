@@ -39,4 +39,9 @@ public class UserException extends BaseException {
          return new UserException("login.fail.password");
     }
 
+    public static UserException notFound(){
+        return new UserException("login.not.found");
+    }
+
+
 }
