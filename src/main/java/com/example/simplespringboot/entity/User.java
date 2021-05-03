@@ -5,6 +5,8 @@ import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.List;
+
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Entity(name="m_user")
@@ -17,7 +19,10 @@ public class User extends  BaseEntity {
     @Column(nullable = false,length = 120)
     private String name;
     private String civilId;
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user",orphanRemoval = true) //  ถ้า user โดนลบ social โดนลบด้วย
     private Social social;
+
+    @OneToMany(mappedBy = "user")
+    private List<Address> addresses;
 }
 

@@ -1,7 +1,9 @@
 package com.example.simplespringboot;
 
+import com.example.simplespringboot.entity.Social;
 import com.example.simplespringboot.entity.User;
 import com.example.simplespringboot.exception.UserException;
+import com.example.simplespringboot.service.SocialService;
 import com.example.simplespringboot.service.UserService;
 import com.sun.source.tree.AssertTree;
 import org.junit.jupiter.api.*;
@@ -17,7 +19,8 @@ class TestUserService {
 
     @Autowired
     private UserService userService;
-
+    @Autowired
+    private SocialService socialService;
 
     @Order(1)
     @Test
@@ -51,6 +54,23 @@ class TestUserService {
 
     @Order(3)
     @Test
+    void testCreateSocial() throws UserException {
+        Optional<User> opt = userService.findByEmail(TestCreateData.email);
+        Assertions.assertTrue(opt.isPresent());
+
+        User user = opt.get();
+        Social social = user.getSocial();
+        Assertions.assertNull(social);
+
+        social= socialService.create(user,SocialTestCreteData.facebook,SocialTestCreteData.instrgram);
+
+        Assertions.assertNotNull(social);
+        Assertions.assertEquals(SocialTestCreteData.facebook,social.getFacebook());
+
+    }
+
+    @Order(4)
+    @Test
     void testDelete(){
         Optional<User> opt = userService.findByEmail(TestCreateData.email);
         Assertions.assertTrue(opt.isPresent());
@@ -69,7 +89,10 @@ class TestUserService {
 
     }
 
-
+    interface  SocialTestCreteData {
+        String facebook = "facebook.com";
+        String instrgram = "instragram";
+     }
     interface TestUpdateData {
         String name= "Update man";
 
