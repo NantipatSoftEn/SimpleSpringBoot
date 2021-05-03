@@ -1,8 +1,10 @@
 package com.example.simplespringboot;
 
+import com.example.simplespringboot.entity.Address;
 import com.example.simplespringboot.entity.Social;
 import com.example.simplespringboot.entity.User;
 import com.example.simplespringboot.exception.UserException;
+import com.example.simplespringboot.service.AddressService;
 import com.example.simplespringboot.service.SocialService;
 import com.example.simplespringboot.service.UserService;
 import com.sun.source.tree.AssertTree;
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.swing.text.html.Option;
+import java.util.List;
 import java.util.Optional;
 
 @SpringBootTest
@@ -21,6 +24,8 @@ class TestUserService {
     private UserService userService;
     @Autowired
     private SocialService socialService;
+    @Autowired
+    private AddressService addressService;
 
     @Order(1)
     @Test
@@ -71,6 +76,30 @@ class TestUserService {
 
     @Order(4)
     @Test
+    void testCreateAddress() throws UserException {
+        Optional<User> opt = userService.findByEmail(TestCreateData.email);
+        Assertions.assertTrue(opt.isPresent());
+
+        User user = opt.get();
+        List<Address> addresses = user.getAddresses();
+        Assertions.assertTrue(addresses.isEmpty());
+
+       createAddress(user,AddressTestCreateData.zipcode);
+       createAddress(user,AddressTestCreateData2.zipcode);
+
+    }
+
+
+    void createAddress(User user,String zipcode) throws UserException {
+        Address address = addressService.create(user,zipcode);
+
+        Assertions.assertNotNull(address);
+        Assertions.assertEquals(zipcode,address.getZipcode());
+
+    }
+
+    @Order(9)
+    @Test
     void testDelete(){
         Optional<User> opt = userService.findByEmail(TestCreateData.email);
         Assertions.assertTrue(opt.isPresent());
@@ -93,6 +122,16 @@ class TestUserService {
         String facebook = "facebook.com";
         String instrgram = "instragram";
      }
+
+     interface  AddressTestCreateData{
+        String zipcode = "83210";
+     }
+
+
+    interface  AddressTestCreateData2{
+        String zipcode = "121111";
+    }
+
     interface TestUpdateData {
         String name= "Update man";
 
