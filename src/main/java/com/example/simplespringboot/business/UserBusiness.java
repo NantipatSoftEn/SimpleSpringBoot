@@ -37,7 +37,7 @@ public class UserBusiness {
 
 
         User user = opt.get();
-        if(userService.matchPassword(request.getPassword(),user.getPassword())){
+        if(!userService.matchPassword(request.getPassword(),user.getPassword())){
             throw UserException.loginFailPasswordIncorrect();
         }
 
