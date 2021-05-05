@@ -9,6 +9,7 @@ import com.example.simplespringboot.model.MLoginResponse;
 import com.example.simplespringboot.model.MRegisterRequest;
 import com.example.simplespringboot.model.MRegisterResponse;
 
+import com.example.simplespringboot.service.TokenService;
 import com.example.simplespringboot.service.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,9 +23,11 @@ import java.util.Optional;
 public class UserBusiness {
     private  final UserService  userService;
     private  final UserMapper userMapper;
-    public UserBusiness(UserService userService, UserMapper userMapper) {
+    private  final TokenService tokenService;
+    public UserBusiness(UserService userService, UserMapper userMapper, TokenService tokenService) {
         this.userService = userService;
         this.userMapper = userMapper;
+        this.tokenService = tokenService;
     }
 
     public String login(MLoginRequest request) throws UserException {
@@ -41,8 +44,7 @@ public class UserBusiness {
             throw UserException.loginFailPasswordIncorrect();
         }
 
-        String token = "JWT to do";
-        return token;
+        return tokenService.tokenize(user);
 
 
     }
