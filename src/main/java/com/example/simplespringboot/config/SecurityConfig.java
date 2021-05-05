@@ -40,7 +40,8 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
                 and().
                 authorizeRequests().
                 antMatchers("/user/register","/user/login").anonymous().
-                anyRequest().authenticated().and().apply(new TokenFilterConfigurer(tokenService));
+                anyRequest().authenticated().
+                and().apply(new TokenFilterConfigurer(tokenService));
 
     }
 }
