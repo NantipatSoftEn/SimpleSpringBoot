@@ -11,6 +11,7 @@ import com.example.simplespringboot.model.MRegisterResponse;
 
 import com.example.simplespringboot.service.TokenService;
 import com.example.simplespringboot.service.UserService;
+import com.example.simplespringboot.util.SecurityUtil;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -54,14 +55,16 @@ public class UserBusiness {
     }
 
     public String refreshToken() throws UserException {
-        SecurityContext context = SecurityContextHolder.getContext();
-        Authentication authentication = context.getAuthentication();
-        String userId = (String) authentication.getPrincipal();
-        Optional<User> opt =  userService.findById(userId);
-        if(opt.isEmpty()){
+        Optional<String> opt = SecurityUtil.getCurrentUserId();
+        if (opt.isEmpty()){
+            throw UserException.unauthorized();
+        }
+        String userId = opt.get();
+        Optional<User> optUser =  userService.findById(userId);
+        if(optUser.isEmpty()){
             throw  UserException.notFound();
         }
-        User user = opt.get();
+        User user = optUser.get();
         return tokenService.tokenize(user);
     }
 

@@ -43,5 +43,8 @@ public class UserException extends BaseException {
         return new UserException("login.not.found");
     }
 
+    public static UserException unauthorized(){
+        return new UserException("unauthorized");
+    }
 
 }
