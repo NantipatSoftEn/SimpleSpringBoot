@@ -39,7 +39,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
                 sessionCreationPolicy(SessionCreationPolicy.STATELESS).
                 and().
                 authorizeRequests().
-                antMatchers("/user/register","/user/login").anonymous().
+                antMatchers("/actuator/**","/user/register","/user/login").anonymous().
                 anyRequest().authenticated().
                 and().apply(new TokenFilterConfigurer(tokenService));
 
