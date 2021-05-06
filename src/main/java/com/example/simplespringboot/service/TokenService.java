@@ -16,14 +16,14 @@ public class TokenService {
     @Value("${app.token.secret}")
     private String secret;
 
-    @Value("${app.token.issure}")
-    private String issure;
+    @Value("${app.token.issuer}")
+    private String issuer;
 
     public  String tokenize(User user){
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.MINUTE,60);
         Date expireAt =  calendar.getTime();
-        return JWT.create().withIssuer(issure).
+        return JWT.create().withIssuer(issuer).
                 withClaim("principal",user.getId()).
                 withClaim("role","USER").
                 withExpiresAt(expireAt).
@@ -35,7 +35,7 @@ public class TokenService {
     public DecodedJWT verify(String token) {
         try {
             JWTVerifier verifier = JWT.require(algorithm()).
-                    withIssuer(issure).
+                    withIssuer(issuer).
                     build();
             return verifier.verify(token);
         }catch (Exception e){

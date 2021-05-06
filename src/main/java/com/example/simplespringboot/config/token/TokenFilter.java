@@ -39,7 +39,7 @@ public class TokenFilter extends GenericFilterBean {
             return;
         }
 
-        if(authorization.startsWith("Bearer")){
+        if(!authorization.startsWith("Bearer")){
             filterChain.doFilter(servletRequest,servletResponse);
             return;
         }
