@@ -60,6 +60,6 @@ public class TokenFilter extends GenericFilterBean {
 
         SecurityContext context = SecurityContextHolder.getContext();
         context.setAuthentication(authentication);
-
+        filterChain.doFilter(servletRequest,servletResponse);
      }
 }

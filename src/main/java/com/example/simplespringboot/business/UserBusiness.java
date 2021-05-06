@@ -11,10 +11,14 @@ import com.example.simplespringboot.model.MRegisterResponse;
 
 import com.example.simplespringboot.service.TokenService;
 import com.example.simplespringboot.service.UserService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.security.Security;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -47,6 +51,18 @@ public class UserBusiness {
         return tokenService.tokenize(user);
 
 
+    }
+
+    public String refreshToken() throws UserException {
+        SecurityContext context = SecurityContextHolder.getContext();
+        Authentication authentication = context.getAuthentication();
+        String userId = (String) authentication.getPrincipal();
+        Optional<User> opt =  userService.findById(userId);
+        if(opt.isEmpty()){
+            throw  UserException.notFound();
+        }
+        User user = opt.get();
+        return tokenService.tokenize(user);
     }
 
     public MRegisterResponse register(MRegisterRequest request) throws UserException {

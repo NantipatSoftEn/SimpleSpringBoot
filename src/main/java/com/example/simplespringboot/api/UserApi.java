@@ -4,6 +4,7 @@ import com.example.simplespringboot.business.UserBusiness;
 import com.example.simplespringboot.entity.User;
 import com.example.simplespringboot.exception.BaseException;
 import com.example.simplespringboot.exception.FileException;
+import com.example.simplespringboot.exception.UserException;
 import com.example.simplespringboot.model.*;
 
 import org.springframework.http.ResponseEntity;
@@ -35,6 +36,11 @@ public class UserApi {
     public ResponseEntity<MRegisterResponse> register(@RequestBody MRegisterRequest request) throws BaseException {
         MRegisterResponse res = business.register(request);
         return ResponseEntity.ok(res);
+    }
+    @GetMapping("/refresh-token")
+    public ResponseEntity<String>  refreshToken() throws UserException {
+        String response = business.refreshToken();
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping
