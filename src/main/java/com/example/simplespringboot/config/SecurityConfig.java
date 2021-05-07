@@ -10,12 +10,18 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 @EnableWebSecurity
 public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 
     private final TokenService tokenService;
 
+    private  final String[] PUBLIC = {
+            "/actuator/**","/user/register","/user/login","/socket"
+    };
     public SecurityConfig(TokenService tokenService) {
         this.tokenService = tokenService;
     }
@@ -34,14 +40,33 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 //        super.configure(http);
-        http.cors().disable().csrf().disable().
-                sessionManagement().
-                sessionCreationPolicy(SessionCreationPolicy.STATELESS).
-                and().
-                authorizeRequests().
-                antMatchers("/actuator/**","/user/register","/user/login").anonymous().
-                anyRequest().authenticated().
-                and().apply(new TokenFilterConfigurer(tokenService));
+        http.cors().disable().csrf().disable()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .authorizeRequests()
+                .antMatchers(PUBLIC)
+                .anonymous()
+                .anyRequest()
+                .authenticated()
+                .and()
+                .apply(new TokenFilterConfigurer(tokenService));
 
+    }
+
+    @Bean
+    public CorsFilter corsFilter(){
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config  = new CorsConfiguration();
+        config.setAllowCredentials(true);
+        config.addAllowedOrigin("http//localhost:4200");
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("OPTIONS");
+        config.addAllowedMethod("POST");
+        config.addAllowedMethod("GET");
+        config.addAllowedMethod("PUT");
+        config.addAllowedMethod("DELETE");
+        source.registerCorsConfiguration("/**",config);
+        return new CorsFilter(source);
     }
 }
