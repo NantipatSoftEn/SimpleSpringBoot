@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { IChatResponse } from '../interface/chat-response';
+import { IChatResponse } from '../interface/i-chat-response';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 @Injectable({
