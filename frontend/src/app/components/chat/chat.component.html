@@ -1,1 +1,11 @@
-<p>chat works!</p>
+<h2>Global Chat</h2>
+<form [formGroup]="chatFormGroup" (ngSubmit)="onSubmit()">
+  <input type="text" formControlName="message" placeholder="Message" />
+  <button
+    type="submit"
+    class="btn btn-primary"
+    [disabled]="chatFormGroup.invalid"
+  >
+    Send
+  </button>
+</form>
