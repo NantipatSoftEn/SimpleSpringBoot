@@ -1,4 +1,5 @@
 <h2>Global Chat</h2>
+<div>Connected:{{ isConected }}</div>
 <form [formGroup]="chatFormGroup" (ngSubmit)="onSubmit()">
   <input type="text" formControlName="message" placeholder="Message" />
   <button

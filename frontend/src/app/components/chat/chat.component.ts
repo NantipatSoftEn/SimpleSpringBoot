@@ -20,21 +20,25 @@ export class ChatComponent implements OnInit {
   });
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.connectWebsocket();
+  }
 
-  // private connectWebsocket() {
-  //   let ws = new SockJS(this.ENDPOINT);
-  //   this.stompClient = Stomp.over(ws);
-  //   let that = this;
-  //   this.stompClient.connect({}, () => {
-  //     that.isConected = true;
-  //     that.subscribeToGlobalChat();
-  //   });
-  // }
+  private connectWebsocket() {
+    let ws = new SockJS(this.ENDPOINT);
+    this.stompClient = Stomp.over(ws);
+    let that = this;
+    this.stompClient.connect({}, () => {
+      that.isConected = true;
+      that.subscribeToGlobalChat();
+    });
+  }
 
-  // private subscribeToGlobalChat() {
-  //   this.stompClient.subscribe('');
-  // }
+  private subscribeToGlobalChat() {
+    this.stompClient.subscribe(this.CHANNEL, (message: any) => {
+      console.log(message);
+    });
+  }
 
   onSubmit() {
     let message = this.chatFormGroup.controls.message.value;
