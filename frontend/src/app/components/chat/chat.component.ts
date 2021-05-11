@@ -4,6 +4,8 @@ import * as Stomp from 'stompjs';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
+import { ChatService } from 'src/app/services/chat.service';
+
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
@@ -18,7 +20,7 @@ export class ChatComponent implements OnInit {
   chatFormGroup: FormGroup = new FormGroup({
     message: new FormControl('', Validators.required),
   });
-  constructor() {}
+  constructor(private chatService: ChatService) {}
 
   ngOnInit(): void {
     this.connectWebsocket();
@@ -42,6 +44,18 @@ export class ChatComponent implements OnInit {
 
   onSubmit() {
     let message = this.chatFormGroup.controls.message.value;
-    alert(message);
+    if (!this.isConected) {
+      alert(`please connect to WebSocket`);
+      return;
+    }
+    //alert(`Ready to send`);
+    this.chatService.postMessage(message).subscribe(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }
