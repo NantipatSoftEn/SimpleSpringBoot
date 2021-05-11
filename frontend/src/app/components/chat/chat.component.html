@@ -10,3 +10,9 @@
     Send
   </button>
 </form>
+<h3>Messages</h3>
+<ul>
+  <li *ngFor="let message of messages">
+    {{ message.from }} - {{ message.message }} - {{ message.created }}
+  </li>
+</ul>

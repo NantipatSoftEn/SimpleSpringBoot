@@ -24,7 +24,7 @@ public class ChatBusiness {
         }
         // TODO: validate message
 
-        final  String destination = "chat";
+        final  String destination = "/topic/chat";
         ChatMessage payload = new ChatMessage();
         payload.setFrom(opt.get());
         payload.setMessage(request.getMessage());
