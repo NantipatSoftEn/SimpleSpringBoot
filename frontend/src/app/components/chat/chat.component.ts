@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { ChatService } from 'src/app/services/chat.service';
-import { IChatMessage } from '../../interface/i-chat-message';
+import { IChatMessage } from '../../interfaces/i-chat-message';
 
 @Component({
   selector: 'app-chat',

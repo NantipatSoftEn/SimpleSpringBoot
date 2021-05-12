@@ -35,7 +35,7 @@ public class UserBusiness {
         this.tokenService = tokenService;
     }
 
-    public String login(MLoginRequest request) throws UserException {
+    public MLoginResponse login(MLoginRequest request) throws UserException {
 
         MLoginResponse m = new MLoginResponse();
         Optional<User>  opt = userService.findByEmail(request.getEmail());
@@ -48,9 +48,9 @@ public class UserBusiness {
         if(!userService.matchPassword(request.getPassword(),user.getPassword())){
             throw UserException.loginFailPasswordIncorrect();
         }
-
-        return tokenService.tokenize(user);
-
+        MLoginResponse response= new MLoginResponse();
+        response.setToken(tokenService.tokenize(user));
+        return response;
 
     }
 
