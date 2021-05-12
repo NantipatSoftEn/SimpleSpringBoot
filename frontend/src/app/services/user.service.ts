@@ -3,7 +3,7 @@ import { ILoginResponse } from '../interfaces/i-login-response';
 import { IRegisterResponse } from '../interfaces/i-register-response';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-
+const url = 'http://localhost:8080/user';
 @Injectable({
   providedIn: 'root',
 })
@@ -11,12 +11,11 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   login(email: string, password: string): Observable<ILoginResponse> {
-    let url = 'http://localhost:8080/user/login';
     let body = {
       email: email,
       password: password,
     };
-    return this.http.post<ILoginResponse>(url, body);
+    return this.http.post<ILoginResponse>(`${url}/login`, body);
   }
 
   register(
@@ -24,28 +23,25 @@ export class UserService {
     password: string,
     name: string
   ): Observable<IRegisterResponse> {
-    let url = 'http://localhost:8080/user/register';
     let body = {
       email: email,
       password: password,
       name: name,
     };
-    return this.http.post<IRegisterResponse>(url, body);
+    return this.http.post<IRegisterResponse>(`${url}/register`, body);
   }
 
   activateAccount(token: string): Observable<any> {
-    let url = 'http://localhost:8080/user/activate';
     let body = {
       token: token,
     };
-    return this.http.post<any>(url, body);
+    return this.http.post<any>(`${url}/activate`, body);
   }
 
   resendActivationEmail(token: string) {
-    let url = 'http://localhost:8080/user/resend-activation-email';
     let body = {
       token: token,
     };
-    return this.http.post<any>(url, body);
+    return this.http.post<any>(`${url}/resend-activation-email`, body);
   }
 }

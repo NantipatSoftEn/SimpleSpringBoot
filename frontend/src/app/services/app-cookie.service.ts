@@ -11,6 +11,9 @@ export class AppCookieService {
   getAccessToken(): string {
     return this.cookieService.get(`ACCESS_TOKEN`);
   }
+  deleteAccessToken() {
+    return this.cookieService.delete('ACCESS_TOKEN');
+  }
   hasAccessToken(): boolean {
     return this.cookieService.check(`ACCESS_TOKEN`);
   }
