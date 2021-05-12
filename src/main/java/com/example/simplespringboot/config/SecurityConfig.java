@@ -1,6 +1,6 @@
 package com.example.simplespringboot.config;
 
-import com.example.simplespringboot.config.token.TokenFilterConfigurer;
+import com.example.simplespringboot.config.token.TokenFilterConfiguerer;
 import com.example.simplespringboot.service.TokenService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -12,7 +12,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
 
 import java.util.Collections;
 
@@ -22,7 +21,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
     private final TokenService tokenService;
 
     private  final String[] PUBLIC = {
-            "/actuator/**","/user/register","/user/login","/socket/**", "/chat/**"
+            "/actuator/**","/user/register","/user/login","/socket/**",
     };
     public SecurityConfig(TokenService tokenService) {
         this.tokenService = tokenService;
@@ -41,35 +40,26 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//        super.configure(http);
-        http.cors().disable().csrf().disable()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .authorizeRequests()
-                .antMatchers(PUBLIC)
-                .anonymous()
-                .anyRequest()
-                .authenticated()
-                .and()
-                .apply(new TokenFilterConfigurer(tokenService));
+        http.cors(config -> {
+            CorsConfiguration cors = new CorsConfiguration();
+            cors.setAllowCredentials(true);
+            cors.setAllowedOriginPatterns(Collections.singletonList("http://*"));
+            cors.addAllowedHeader("*");
+            cors.addAllowedMethod("GET");
+            cors.addAllowedMethod("POST");
+            cors.addAllowedMethod("PUT");
+            cors.addAllowedMethod("DELETE");
+            cors.addAllowedMethod("OPTIONS");
 
+            UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+            source.registerCorsConfiguration("/**", cors);
+
+            config.configurationSource(source);
+        }).csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and().authorizeRequests().antMatchers(PUBLIC).anonymous()
+                .anyRequest().authenticated()
+                .and().apply(new TokenFilterConfiguerer(tokenService));
     }
 
-    @Bean
-    public CorsFilter corsFilter(){
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        CorsConfiguration config  = new CorsConfiguration();
-        config.setAllowCredentials(true);
-        config.addAllowedOrigin("http://localhost:4200");
-//        config.setAllowedOriginPatterns(Collections.singletonList("http://*"));
-        config.addAllowedHeader("*");
-        config.addAllowedMethod("OPTIONS");
-        config.addAllowedMethod("POST");
-        config.addAllowedMethod("GET");
-        config.addAllowedMethod("PUT");
-        config.addAllowedMethod("DELETE");
-        source.registerCorsConfiguration("/**",config);
-        return new CorsFilter(source);
-    }
 }
