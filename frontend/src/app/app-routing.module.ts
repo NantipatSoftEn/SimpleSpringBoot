@@ -1,5 +1,6 @@
 import { RouterModule, Routes } from '@angular/router';
 
+import { AuthGuardService } from './services/auth-guard.service';
 import { ChatComponent } from './components/chat/chat.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './components/login/login.component';
@@ -18,6 +19,7 @@ const routes: Routes = [
   {
     path: `dashboard`,
     component: DashboardComponent,
+    canActivate: [AuthGuardService],
   },
   {
     path: `chat`,
