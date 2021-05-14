@@ -18,12 +18,12 @@ public class User extends  BaseEntity {
     private String password;
     @Column(nullable = false,length = 120)
     private String name;
-    private String civilId;
     @OneToOne(mappedBy = "user",orphanRemoval = true) //  ถ้า user โดนลบ social โดนลบด้วย
     private Social social;
     // FetchType.LAZY จะไม่ดึง relation ติดมาด้วย
     // FetchType.EAGER address จะถูกเก็บใน memory
     @OneToMany(mappedBy = "user",orphanRemoval = true,fetch = FetchType.EAGER)
     private List<Address> addresses;
+    private boolean activated;
 }
 

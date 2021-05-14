@@ -1,6 +1,8 @@
 package com.example.simplespringboot.business;
 
+import com.example.common.EmailRequest;
 import com.example.simplespringboot.entity.User;
+import com.example.simplespringboot.exception.EmailException;
 import com.example.simplespringboot.exception.FileException;
 import com.example.simplespringboot.exception.UserException;
 import com.example.simplespringboot.mapper.UserMapper;
@@ -8,31 +10,34 @@ import com.example.simplespringboot.model.MLoginRequest;
 import com.example.simplespringboot.model.MLoginResponse;
 import com.example.simplespringboot.model.MRegisterRequest;
 import com.example.simplespringboot.model.MRegisterResponse;
-
 import com.example.simplespringboot.service.TokenService;
 import com.example.simplespringboot.service.UserService;
 import com.example.simplespringboot.util.SecurityUtil;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
+import lombok.extern.log4j.Log4j2;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
+import org.springframework.util.concurrent.ListenableFuture;
+import org.springframework.util.concurrent.ListenableFutureCallback;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.security.Security;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Log4j2
 public class UserBusiness {
     private  final UserService  userService;
     private  final UserMapper userMapper;
     private  final TokenService tokenService;
-    public UserBusiness(UserService userService, UserMapper userMapper, TokenService tokenService) {
+    private  final EmailBusiness emailBusiness;
+    public UserBusiness(UserService userService, UserMapper userMapper, TokenService tokenService, EmailBusiness emailBusiness) {
         this.userService = userService;
         this.userMapper = userMapper;
         this.tokenService = tokenService;
+        this.emailBusiness = emailBusiness;
     }
 
     public MLoginResponse login(MLoginRequest request) throws UserException {
@@ -67,12 +72,17 @@ public class UserBusiness {
         User user = optUser.get();
         return tokenService.tokenize(user);
     }
+    private void sendEmail(User user) throws EmailException {
+        // TODO: generate token
+        String token ="";
+        emailBusiness.sendActivateUserEmail(user.getEmail(),user.getName(),token);
 
+
+    }
     public MRegisterResponse register(MRegisterRequest request) throws UserException {
         User user =  userService.create(request.getEmail(),request.getPassword(),request.getName());
-         return userMapper.toRegisTerResponse(user);
 
-
+        return userMapper.toRegisTerResponse(user);
     }
 
     public  String uploadProfilePicture(MultipartFile file) throws FileException {
