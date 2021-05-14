@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
@@ -24,6 +25,8 @@ public class User extends  BaseEntity {
     // FetchType.EAGER address จะถูกเก็บใน memory
     @OneToMany(mappedBy = "user",orphanRemoval = true,fetch = FetchType.EAGER)
     private List<Address> addresses;
+    private String token;
+    private Date tokenExpire;
     private boolean activated;
 }
 

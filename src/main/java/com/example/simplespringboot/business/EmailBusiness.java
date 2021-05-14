@@ -35,9 +35,11 @@ public class EmailBusiness {
             throw EmailException.templateNotFound();
         }
 
+        log.info("Token= " + token);
+
         String finalLink = "http://localhost:4200/activate/"+token;
         html = html.replace("${P_NAME}",name);
-        html = html.replace("${LINK}",finalLink);
+        html = html.replace("${P_LINK}",finalLink);
 
         EmailRequest request = new EmailRequest();
         request.setTo(email);

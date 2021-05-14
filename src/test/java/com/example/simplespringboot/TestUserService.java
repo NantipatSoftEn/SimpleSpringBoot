@@ -7,12 +7,15 @@ import com.example.simplespringboot.exception.UserException;
 import com.example.simplespringboot.service.AddressService;
 import com.example.simplespringboot.service.SocialService;
 import com.example.simplespringboot.service.UserService;
+import com.example.simplespringboot.util.SecurityUtil;
 import com.sun.source.tree.AssertTree;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.swing.text.html.Option;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,7 +33,9 @@ class TestUserService {
     @Order(1)
     @Test
     void testCreate() throws  UserException {
-        User user = userService.create(TestCreateData.email,TestCreateData.password,TestCreateData.name);
+        String token = SecurityUtil.generateToken();
+
+        User user = userService.create(TestCreateData.email,TestCreateData.password,TestCreateData.name,token,nextXMinute(30));
         // check not null
         System.out.println(user);
         Assertions.assertNotNull(user);
@@ -45,6 +50,11 @@ class TestUserService {
         Assertions.assertEquals(TestCreateData.name,user.getName());
     }
 
+    private Date nextXMinute(int minute){
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MINUTE,minute);
+        return calendar.getTime();
+    }
     @Order(2)
     @Test
     void testUpdate() throws UserException {

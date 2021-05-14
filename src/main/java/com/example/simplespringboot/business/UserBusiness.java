@@ -22,9 +22,7 @@ import org.springframework.util.concurrent.ListenableFutureCallback;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @Log4j2
@@ -74,14 +72,15 @@ public class UserBusiness {
     }
     private void sendEmail(User user) throws EmailException {
         // TODO: generate token
-        String token ="";
+        String token  = user.getToken();
         emailBusiness.sendActivateUserEmail(user.getEmail(),user.getName(),token);
 
 
     }
-    public MRegisterResponse register(MRegisterRequest request) throws UserException {
-        User user =  userService.create(request.getEmail(),request.getPassword(),request.getName());
-
+    public MRegisterResponse register(MRegisterRequest request) throws UserException, EmailException {
+        String token =SecurityUtil.generateToken();
+        User user =  userService.create(request.getEmail(),request.getPassword(),request.getName(),token,nextXMinute(30));
+        sendEmail(user);
         return userMapper.toRegisTerResponse(user);
     }
 
@@ -110,4 +109,12 @@ public class UserBusiness {
         }
         return "" + file.getSize();
     }
+
+    private Date nextXMinute(int minute){
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MINUTE,minute);
+        return calendar.getTime();
+    }
+
+
 }
