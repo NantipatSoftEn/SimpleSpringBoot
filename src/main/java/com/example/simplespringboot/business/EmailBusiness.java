@@ -2,7 +2,6 @@ package com.example.simplespringboot.business;
 
 import com.example.common.EmailRequest;
 import com.example.simplespringboot.exception.EmailException;
-import com.example.simplespringboot.service.EmailService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
@@ -20,10 +19,10 @@ import java.io.IOException;
 @Log4j2
 public class EmailBusiness {
 
-    private  final KafkaTemplate<String, EmailRequest> kafkaTemplate;
-    public EmailBusiness( KafkaTemplate<String, EmailRequest> kafkaTemplate) {
+    private  final KafkaTemplate<String, EmailRequest> kafkaEmailTemplate;
+    public EmailBusiness( KafkaTemplate<String, EmailRequest> kafkaEmailTemplate) {
 
-        this.kafkaTemplate = kafkaTemplate;
+        this.kafkaEmailTemplate = kafkaEmailTemplate;
     }
 
     public  void sendActivateUserEmail(String email,String name,String token) throws EmailException {
@@ -43,11 +42,11 @@ public class EmailBusiness {
 
         EmailRequest request = new EmailRequest();
         request.setTo(email);
-        request.setContent("");
+        request.setContent(html);
+        request.setSubject("Please activate your account");
 
-        String subject = "Please activate your account";
 
-        ListenableFuture<SendResult<String,EmailRequest>> future = kafkaTemplate.send("activation-email",request);
+        ListenableFuture<SendResult<String,EmailRequest>> future = kafkaEmailTemplate.send("activation-email",request);
         future.addCallback(new ListenableFutureCallback<>() {
             @Override
             public void onFailure(Throwable throwable) {

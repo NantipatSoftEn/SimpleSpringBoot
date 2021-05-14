@@ -44,9 +44,8 @@ public class SecurityUtil {
                 new CharacterRule(EnglishCharacterData.LowerCase, 10),
 
                 // at least one digit character
-                new CharacterRule(EnglishCharacterData.Digit, 5));
+                new CharacterRule(EnglishCharacterData.Digit, 10));
 
-                new CharacterRule(EnglishCharacterData.Special,5);
         PasswordGenerator generator = new PasswordGenerator();
 
 // Generated password is 12 characters long, which complies with policy

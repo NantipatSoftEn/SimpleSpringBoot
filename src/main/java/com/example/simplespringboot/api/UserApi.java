@@ -37,6 +37,13 @@ public class UserApi {
         MRegisterResponse res = business.register(request);
         return ResponseEntity.ok(res);
     }
+
+    @PostMapping("/activate")
+    public ResponseEntity<MActivateResponse> activate(@RequestBody MActivateRequest request) throws BaseException {
+        MActivateResponse response = business.activate(request);
+        return ResponseEntity.ok(response);
+    }
+
     @GetMapping("/refresh-token")
     public ResponseEntity<String>  refreshToken() throws UserException {
         String response = business.refreshToken();
