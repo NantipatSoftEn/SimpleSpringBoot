@@ -69,4 +69,14 @@ public class UserException extends BaseException {
         return new UserException("activate.token.expire");
     }
 
+    // RESEND ACTIVATION EMAIL
+
+    public static UserException resendActivationEmailNoToken() {
+        return new UserException("resend.activation.no.token");
+    }
+
+    public static UserException resendActivationTokenNotFound() {
+        return new UserException("resend.activation.fail");
+    }
+
 }

@@ -7,6 +7,7 @@ import com.example.simplespringboot.exception.FileException;
 import com.example.simplespringboot.exception.UserException;
 import com.example.simplespringboot.model.*;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -42,6 +43,12 @@ public class UserApi {
     public ResponseEntity<MActivateResponse> activate(@RequestBody MActivateRequest request) throws BaseException {
         MActivateResponse response = business.activate(request);
         return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/resend-activation-email")
+    public ResponseEntity<Void> resendActivationEmail(@RequestBody MResendActivationEmailRequest request) throws BaseException {
+        business.resendActivationEmail(request);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @GetMapping("/refresh-token")

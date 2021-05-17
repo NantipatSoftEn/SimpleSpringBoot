@@ -127,10 +127,11 @@ public class UserBusiness {
         }
 
         User user = opt.get();
-
+        // activate แล้ว (กด activate  ครั้งที่ 2)
         if (user.isActivated()) {
             throw UserException.activateAlready();
         }
+
 
         Date now = new Date();
         Date expireDate = user.getTokenExpire();
@@ -145,6 +146,33 @@ public class UserBusiness {
         response.setSuccess(true);
         return response;
     }
+
+
+    public void resendActivationEmail(MResendActivationEmailRequest request) throws UserException, EmailException {
+        String email = request.getEmail();
+        System.out.println("token:"+email);
+        if (StringUtil.isNullOrEmpty(email)) {
+            throw UserException.resendActivationEmailNoToken();
+        }
+
+        Optional<User> opt = userService.findByEmail(email);
+        if (opt.isEmpty()) {
+            throw UserException.resendActivationTokenNotFound();
+        }
+
+        User user = opt.get();
+
+        if (user.isActivated()) {
+            throw UserException.activateAlready();
+        }
+
+        user.setToken(SecurityUtil.generateToken());
+        user.setTokenExpire(nextXMinute(30));
+        user = userService.update(user);
+
+        sendEmail(user);
+    }
+
 
     private Date nextXMinute(int minute){
         Calendar calendar = Calendar.getInstance();
