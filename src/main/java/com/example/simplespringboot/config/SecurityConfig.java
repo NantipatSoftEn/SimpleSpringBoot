@@ -21,7 +21,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
     private final TokenService tokenService;
 
     private  final String[] PUBLIC = {
-            "/actuator/**","/user/register","/user/login","/socket/**",
+            "/actuator/**","/user/register","/user/login","/user/activate","/socket/**",
     };
     public SecurityConfig(TokenService tokenService) {
         this.tokenService = tokenService;

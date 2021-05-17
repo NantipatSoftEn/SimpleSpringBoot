@@ -11,10 +11,18 @@ public class UserException extends BaseException {
         return new UserException("register.req.null");
     }
 
+    public static UserException notFound(){
+        return new UserException("login.not.found");
+    }
+
+    public static UserException unauthorized(){
+        return new UserException("unauthorized");
+    }
+
     public  static  UserException emailNull(){
         return new UserException("register.email.null");
     }
-
+    // CREATE
     public static  UserException createEmailNull(){
          return new UserException("create.email.null");
     }
@@ -30,7 +38,7 @@ public class UserException extends BaseException {
     public static  UserException createNameNull(){
         return new UserException("create.name.null");
     }
-
+    // LOGIN
     public static UserException loginFailEmailNotFound(){
          return new UserException("login.fail.email");
     }
@@ -39,12 +47,26 @@ public class UserException extends BaseException {
          return new UserException("login.fail.password");
     }
 
-    public static UserException notFound(){
-        return new UserException("login.not.found");
+    public static UserException loginFailUserUnactivated() {
+        return new UserException("login.fail.unactivated");
     }
 
-    public static UserException unauthorized(){
-        return new UserException("unauthorized");
+    // ACTIVATE
+
+    public static UserException activateNoToken() {
+        return new UserException("activate.no.token");
+    }
+
+    public static UserException activateAlready() {
+        return new UserException("activate.already");
+    }
+
+    public static UserException activateFail() {
+        return new UserException("activate.fail");
+    }
+
+    public static UserException activateTokenExpire() {
+        return new UserException("activate.token.expire");
     }
 
 }

@@ -6,13 +6,11 @@ import com.example.simplespringboot.exception.EmailException;
 import com.example.simplespringboot.exception.FileException;
 import com.example.simplespringboot.exception.UserException;
 import com.example.simplespringboot.mapper.UserMapper;
-import com.example.simplespringboot.model.MLoginRequest;
-import com.example.simplespringboot.model.MLoginResponse;
-import com.example.simplespringboot.model.MRegisterRequest;
-import com.example.simplespringboot.model.MRegisterResponse;
+import com.example.simplespringboot.model.*;
 import com.example.simplespringboot.service.TokenService;
 import com.example.simplespringboot.service.UserService;
 import com.example.simplespringboot.util.SecurityUtil;
+import io.netty.util.internal.StringUtil;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
@@ -46,11 +44,17 @@ public class UserBusiness {
             throw UserException.loginFailEmailNotFound();
         }
 
-
+        // verify password
         User user = opt.get();
         if(!userService.matchPassword(request.getPassword(),user.getPassword())){
             throw UserException.loginFailPasswordIncorrect();
         }
+
+        // validate activate status
+        if(!user.isActivated()){
+            throw UserException.loginFailUserUnactivated();
+        }
+
         MLoginResponse response= new MLoginResponse();
         response.setToken(tokenService.tokenize(user));
         return response;
@@ -80,6 +84,7 @@ public class UserBusiness {
     public MRegisterResponse register(MRegisterRequest request) throws UserException, EmailException {
         String token =SecurityUtil.generateToken();
         User user =  userService.create(request.getEmail(),request.getPassword(),request.getName(),token,nextXMinute(30));
+        System.out.println("user"+user);
         sendEmail(user);
         return userMapper.toRegisTerResponse(user);
     }
@@ -108,6 +113,37 @@ public class UserBusiness {
             e.printStackTrace();
         }
         return "" + file.getSize();
+    }
+
+    public MActivateResponse activate(MActivateRequest request) throws  UserException {
+        String token = request.getToken();
+        if (StringUtil.isNullOrEmpty(token)) {
+            throw UserException.activateNoToken();
+        }
+
+        Optional<User> opt = userService.findByToken(token);
+        if (opt.isEmpty()) {
+            throw UserException.activateFail();
+        }
+
+        User user = opt.get();
+
+        if (user.isActivated()) {
+            throw UserException.activateAlready();
+        }
+
+        Date now = new Date();
+        Date expireDate = user.getTokenExpire();
+        if (now.after(expireDate)) {
+            throw UserException.activateTokenExpire();
+        }
+
+        user.setActivated(true);
+        userService.update(user);
+
+        MActivateResponse response = new MActivateResponse();
+        response.setSuccess(true);
+        return response;
     }
 
     private Date nextXMinute(int minute){

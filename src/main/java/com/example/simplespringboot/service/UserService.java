@@ -26,6 +26,10 @@ public class UserService {
         return repository.findById(id);
     }
 
+    public Optional<User> findByToken(String token) {
+        return repository.findByToken(token);
+    }
+
     public Optional<User> findByEmail(String email) {
         return repository.findByEmail(email);
     }
