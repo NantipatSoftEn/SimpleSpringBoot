@@ -1,5 +1,6 @@
 package com.example.simplespringboot.util;
 
+import lombok.extern.log4j.Log4j2;
 import org.passay.CharacterRule;
 import org.passay.EnglishCharacterData;
 import org.passay.PasswordGenerator;
@@ -10,7 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-
+@Log4j2
 public class SecurityUtil {
     private  SecurityUtil(){
 
@@ -18,6 +19,7 @@ public class SecurityUtil {
 
     public  static Optional<String> getCurrentUserId(){
         SecurityContext context = SecurityContextHolder.getContext();
+        log.info("SecurityContext : "+ context);
         if(context == null){
             return Optional.empty();
         }

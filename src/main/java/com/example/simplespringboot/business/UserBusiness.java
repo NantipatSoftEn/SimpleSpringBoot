@@ -38,7 +38,6 @@ public class UserBusiness {
 
     public MUserProfile getMyUserProfile() throws UserException {
         Optional<String> opt = SecurityUtil.getCurrentUserId();
-        log.info("Check opt: "+ opt);
         if (opt.isEmpty()) {
             throw UserException.unauthorized();
         }
