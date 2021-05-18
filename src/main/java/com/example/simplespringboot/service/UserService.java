@@ -3,7 +3,8 @@ package com.example.simplespringboot.service;
 import com.example.simplespringboot.entity.User;
 import com.example.simplespringboot.exception.UserException;
 import com.example.simplespringboot.repository.UserRepository;
-import com.example.simplespringboot.util.SecurityUtil;
+import lombok.extern.log4j.Log4j2;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
+@Log4j2
 public class UserService {
     private  final UserRepository repository;
     private final PasswordEncoder passwordEncoder;
@@ -21,8 +23,9 @@ public class UserService {
         this.repository =  repository;
         this.passwordEncoder = passwordEncoder;
     }
-
+    @Cacheable(value="user",key="#id",unless = "#result == null")
     public Optional<User> findById(String id) {
+        log.info("Load User From DB: "+ id);
         return repository.findById(id);
     }
 

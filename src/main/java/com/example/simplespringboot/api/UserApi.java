@@ -26,6 +26,12 @@ public class UserApi {
         this.business = business;
     }
 
+    @GetMapping("/profile")
+    public ResponseEntity<MUserProfile> getMyUserProfile() throws UserException {
+        MUserProfile response = business.getMyUserProfile();
+        return ResponseEntity.ok(response);
+    }
+
     @PostMapping("/login")
     public ResponseEntity<MLoginResponse> login(@RequestBody MLoginRequest request) throws BaseException {
         MLoginResponse  response = business.login(request);

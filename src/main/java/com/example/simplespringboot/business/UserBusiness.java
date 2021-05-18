@@ -36,6 +36,23 @@ public class UserBusiness {
         this.emailBusiness = emailBusiness;
     }
 
+    public MUserProfile getMyUserProfile() throws UserException {
+        Optional<String> opt = SecurityUtil.getCurrentUserId();
+        log.info("Check opt: "+ opt);
+        if (opt.isEmpty()) {
+            throw UserException.unauthorized();
+        }
+
+        String userId = opt.get();
+
+        Optional<User> optUser = userService.findById(userId);
+        if (optUser.isEmpty()) {
+            throw UserException.notFound();
+        }
+
+        return userMapper.toUserProfile(optUser.get());
+    }
+
     public MLoginResponse login(MLoginRequest request) throws UserException {
 
         MLoginResponse m = new MLoginResponse();
