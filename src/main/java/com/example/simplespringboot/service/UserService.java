@@ -4,6 +4,7 @@ import com.example.simplespringboot.entity.User;
 import com.example.simplespringboot.exception.UserException;
 import com.example.simplespringboot.repository.UserRepository;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -51,10 +52,11 @@ public class UserService {
         user.setName(name);
         return repository.save(user);
     }
-
+    @CacheEvict(value="user",key="#id")
     public void deleteById(String id ){
         repository.deleteById(id);
     }
+
     public boolean matchPassword(String rawPassword,String encodedPassword){
         return passwordEncoder.matches(rawPassword,encodedPassword);
     }
