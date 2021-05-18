@@ -79,4 +79,9 @@ public class UserException extends BaseException {
         return new UserException("resend.activation.fail");
     }
 
+    // UPDATE
+
+    public static UserException updateNameNull() {
+        return new UserException("update.name.null");
+    }
 }

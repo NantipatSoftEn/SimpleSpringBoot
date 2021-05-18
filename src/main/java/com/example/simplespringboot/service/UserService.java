@@ -4,6 +4,7 @@ import com.example.simplespringboot.entity.User;
 import com.example.simplespringboot.exception.UserException;
 import com.example.simplespringboot.repository.UserRepository;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -40,7 +41,7 @@ public class UserService {
     public User update(User user){
         return repository.save(user);
     }
-
+    @CachePut(value="user",key="#id")
     public  User updateName(String id,String name) throws UserException {
         Optional<User> opt = repository.findById(id);
         if(opt.isEmpty()){
