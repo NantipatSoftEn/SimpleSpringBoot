@@ -1,5 +1,6 @@
 import { RouterModule, Routes } from '@angular/router';
 
+import { ActivateAccountComponent } from './components/activate-account/activate-account.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { ChatComponent } from './components/chat/chat.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -15,6 +16,10 @@ const routes: Routes = [
   {
     path: `register`,
     component: RegisterComponent,
+  },
+  {
+    path: `activate/:token`,
+    component: ActivateAccountComponent,
   },
   {
     path: `dashboard`,

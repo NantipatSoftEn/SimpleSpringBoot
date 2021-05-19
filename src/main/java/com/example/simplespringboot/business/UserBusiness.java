@@ -184,13 +184,13 @@ public class UserBusiness {
 
 
     public void resendActivationEmail(MResendActivationEmailRequest request) throws UserException, EmailException {
-        String email = request.getEmail();
-        System.out.println("token:"+email);
-        if (StringUtil.isNullOrEmpty(email)) {
+        String token = request.getToken();
+        System.out.println("token:"+token);
+        if (StringUtil.isNullOrEmpty(token)) {
             throw UserException.resendActivationEmailNoToken();
         }
 
-        Optional<User> opt = userService.findByEmail(email);
+        Optional<User> opt = userService.findByToken(token);
         if (opt.isEmpty()) {
             throw UserException.resendActivationTokenNotFound();
         }

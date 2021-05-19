@@ -12,6 +12,7 @@ import { LoginComponent } from './components/login/login.component';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './components/register/register.component';
+import { ActivateAccountComponent } from './components/activate-account/activate-account.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { RegisterComponent } from './components/register/register.component';
     RegisterComponent,
     DashboardComponent,
     HeaderComponent,
+    ActivateAccountComponent,
   ],
   imports: [
     BrowserModule,
