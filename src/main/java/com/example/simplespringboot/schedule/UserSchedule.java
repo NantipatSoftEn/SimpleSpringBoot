@@ -15,10 +15,10 @@ public class UserSchedule {
          5 => mouth
          6 => year
      */
-    @Scheduled(cron = "0 * * * * *")
-    public void testEveryMinute(){
-       log.info("testEveryMinute");
-    }
+//    @Scheduled(cron = "0 * * * * *")
+//    public void testEveryMinute(){
+//       log.info("testEveryMinute");
+//    }
 
     // EveryDay at 00:00
     @Scheduled(cron = "0 0 0 * * *")
