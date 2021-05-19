@@ -12,10 +12,10 @@ import { TranslateService } from '@ngx-translate/core';
 export class HeaderComponent implements OnInit {
   constructor(
     private appCookieService: AppCookieService,
-    private router: Router
-  ) //private translateService: TranslateService
-  {
-    //this.translateService.setDefaultLang('th');
+    private router: Router,
+    private translateService: TranslateService
+  ) {
+    this.translateService.setDefaultLang('th');
   }
 
   ngOnInit(): void {}
@@ -26,10 +26,10 @@ export class HeaderComponent implements OnInit {
   }
 
   swithToThai() {
-    //this.translateService.use('th');
+    this.translateService.use('th');
   }
 
   swithToEnglish() {
-    //this.translateService.use('en');
+    this.translateService.use('en');
   }
 }

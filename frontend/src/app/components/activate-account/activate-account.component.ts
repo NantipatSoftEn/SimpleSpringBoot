@@ -2,6 +2,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 import { UserService } from '../../services/user.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-activate-account',
@@ -20,7 +21,8 @@ export class ActivateAccountComponent implements OnInit {
   constructor(
     private activateRoute: ActivatedRoute,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private translateService: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -43,9 +45,9 @@ export class ActivateAccountComponent implements OnInit {
         console.log(error);
         let code = error.error.error;
 
-        // this.translateService.get(code, {}).subscribe((res: string) => {
-        //   this.errorMessage = res;
-        // });
+        this.translateService.get(code, {}).subscribe((res: string) => {
+          this.errorMessage = res;
+        });
 
         if (code === 'user.activate.already') {
           this.isSuccess = false;
