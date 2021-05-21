@@ -39,7 +39,7 @@ public class EmailBusiness {
         String finalLink = "http://localhost:4200/activate/"+token;
         html = html.replace("${P_NAME}",name);
         html = html.replace("${P_LINK}",finalLink);
-
+        log.info("html"+html);
         EmailRequest request = new EmailRequest();
         request.setTo(email);
         request.setContent(html);
