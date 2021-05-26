@@ -2,42 +2,31 @@ server:
   port: 8080
 spring:
   kafka:
-    bootstrap-servers: localhost:9092
+    bootstrap-servers: ${SECRETE_KAFKA_HOST:localhost}:${SECRETE_KAFKA_PORT:9092}
     consumer:
       group-id: "my-awesome-app"
-  mail:
-    host: smtp.gmail.com
-    port: 587
-    username: army@xhub.trade
-    password: dcvblgfeseohlipn
-    properties:
-      mail:
-        smtp:
-          auth: true
-          starttls:
-            enable: true
   jpa:
     hibernate:
       ddl-auto: update
 #     if production mode = none
   datasource:
-    url: jdbc:postgresql://localhost:5432/backend
-    username: postgres
-    password: syspass
+    url: jdbc:postgresql://${SECRETE_DB_HOST:localhost}:${SECRETE_DB_PORT:5432}/backend
+    username: ${SECRETE_DB_USERNAME:postgres}
+    password: ${SECRETE_DB_PASSWORD:syspass}
   servlet:
     multipart:
       enabled: true
       max-file-size: 2MB
       max-request-size: 5MB
   redis:
-    host: localhost
-    port: 6379
-    password: syspass
+    host: ${SECRET_REDIS_HOST:localhost}
+    port: ${SECRET_REDIS_PORT:6379}
+    password: ${SECRET_REDIS_PASSWORD}
   cache:
     type: redis
     redis:
       time-to-live: 300000
 app:
   token:
-    secret: m#MySecret2021GGWP
+    secret: ${SECRET_JWT_SECRET}
     issuer: BackendService
