@@ -1,6 +1,5 @@
 package com.example.simplespringboot.business;
 
-import com.example.common.EmailRequest;
 import com.example.simplespringboot.entity.User;
 import com.example.simplespringboot.exception.EmailException;
 import com.example.simplespringboot.exception.FileException;

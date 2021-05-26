@@ -1,7 +1,7 @@
 package com.example.simplespringboot.business;
 
-import com.example.common.EmailRequest;
 import com.example.simplespringboot.exception.EmailException;
+import com.iamnbty.training.common.EmailRequest;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;

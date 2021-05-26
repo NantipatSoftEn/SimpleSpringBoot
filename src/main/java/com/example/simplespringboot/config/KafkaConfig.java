@@ -1,7 +1,7 @@
 package com.example.simplespringboot.config;
 
-import com.example.common.EmailRequest;
-import kafka.tools.ConsoleProducer;
+
+import com.iamnbty.training.common.EmailRequest;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 

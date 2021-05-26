@@ -32,7 +32,7 @@
             <version>1.6.0</version>
         </dependency>
         <dependency>
-            <groupId>com.example</groupId>
+            <groupId>com.iamnbty.training</groupId>
             <artifactId>common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
@@ -127,6 +127,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>app</finalName>
     </build>
 
 </project>
