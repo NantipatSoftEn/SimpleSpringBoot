@@ -21,7 +21,7 @@ spring:
       ddl-auto: update
   #     if production mode = none
   datasource:
-    url: jdbc:postgresql://db:5432/backend
+    url: jdbc:postgresql://localhost:5432/backend
     username: postgres
     password: syspass
   servlet:
