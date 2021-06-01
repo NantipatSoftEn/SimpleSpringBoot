@@ -20,7 +20,7 @@ spec:
         app: backend
     spec:
       containers:
-        - image: localhost:5000/training/backend
+        - image: localhost:5000/backend
           name: backend
           imagePullPolicy: Always
           ports:
