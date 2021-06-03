@@ -39,56 +39,56 @@ spec:
             initialDelaySeconds: 90
             periodSeconds: 10
           env:
-            - name: SECRET_KAFKA_HOST
+#            - name: SECRET_KAFKA_HOST
+#              valueFrom:
+#                secretKeyRef:
+#                  name: backend
+#                  key: kafka_host
+#            - name: SECRET_KAFKA_PORT
+#              valueFrom:
+#                secretKeyRef:
+#                  name: backend
+#                  key: kafka_port
+            - name: SPRING_DATASOURCE_URL
               valueFrom:
                 secretKeyRef:
                   name: backend
-                  key: kafka_host
-            - name: SECRET_KAFKA_PORT
+                  key: SPRING_DATASOURCE_URL
+#            - name: SECRET_DB_PORT
+#              valueFrom:
+#                secretKeyRef:
+#                  name: backend
+#                  key: db_port
+            - name: SPRING_DATASOURCE_USERNAME
               valueFrom:
                 secretKeyRef:
                   name: backend
-                  key: kafka_port
-            - name: SECRET_DB_HOST
+                  key: SPRING_DATASOURCE_USERNAME
+            - name: SPRING_DATASOURCE_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: backend
-                  key: db_host
-            - name: SECRET_DB_PORT
-              valueFrom:
-                secretKeyRef:
-                  name: backend
-                  key: db_port
-            - name: SECRET_DB_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: backend
-                  key: db_username
-            - name: SECRET_DB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: backend
-                  key: db_password
-            - name: SECRET_REDIS_HOST
-              valueFrom:
-                secretKeyRef:
-                  name: backend
-                  key: redis_host
-            - name: SECRET_REDIS_PORT
-              valueFrom:
-                secretKeyRef:
-                  name: backend
-                  key: redis_port
-            - name: SECRET_REDIS_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: backend
-                  key: redis_password
-            - name: SECRET_JWT_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: backend
-                  key: jwt_secret
+                  key: SPRING_DATASOURCE_PASSWORD
+#            - name: SECRET_REDIS_HOST
+#              valueFrom:
+#                secretKeyRef:
+#                  name: backend
+#                  key: redis_host
+#            - name: SECRET_REDIS_PORT
+#              valueFrom:
+#                secretKeyRef:
+#                  name: backend
+#                  key: redis_port
+#            - name: SECRET_REDIS_PASSWORD
+#              valueFrom:
+#                secretKeyRef:
+#                  name: backend
+#                  key: redis_password
+#            - name: SECRET_JWT_SECRET
+#              valueFrom:
+#                secretKeyRef:
+#                  name: backend
+#                  key: jwt_secret
 ---
 apiVersion: v1
 kind: Service
