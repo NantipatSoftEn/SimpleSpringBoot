@@ -36,29 +36,21 @@ spec:
             httpGet:
               path: /actuator/health
               port: 8080
-            initialDelaySeconds: 90
+            initialDelaySeconds: 200
             periodSeconds: 10
           env:
-#            - name: SECRET_KAFKA_HOST
-#              valueFrom:
-#                secretKeyRef:
-#                  name: backend
-#                  key: kafka_host
-#            - name: SECRET_KAFKA_PORT
-#              valueFrom:
-#                secretKeyRef:
-#                  name: backend
-#                  key: kafka_port
+            - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
+              valueFrom:
+                secretKeyRef:
+                  name: backend
+                  key: SPRING_KAFKA_BOOTSTRAP_SERVERS
+
             - name: SPRING_DATASOURCE_URL
               valueFrom:
                 secretKeyRef:
                   name: backend
                   key: SPRING_DATASOURCE_URL
-#            - name: SECRET_DB_PORT
-#              valueFrom:
-#                secretKeyRef:
-#                  name: backend
-#                  key: db_port
+
             - name: SPRING_DATASOURCE_USERNAME
               valueFrom:
                 secretKeyRef:
@@ -69,26 +61,26 @@ spec:
                 secretKeyRef:
                   name: backend
                   key: SPRING_DATASOURCE_PASSWORD
-#            - name: SECRET_REDIS_HOST
-#              valueFrom:
-#                secretKeyRef:
-#                  name: backend
-#                  key: redis_host
-#            - name: SECRET_REDIS_PORT
-#              valueFrom:
-#                secretKeyRef:
-#                  name: backend
-#                  key: redis_port
-#            - name: SECRET_REDIS_PASSWORD
-#              valueFrom:
-#                secretKeyRef:
-#                  name: backend
-#                  key: redis_password
-#            - name: SECRET_JWT_SECRET
-#              valueFrom:
-#                secretKeyRef:
-#                  name: backend
-#                  key: jwt_secret
+            - name: SPRING_REDIS_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: backend
+                  key: SPRING_REDIS_HOST
+            - name: SPRING_REDIS_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: backend
+                  key: SPRING_REDIS_PORT
+            - name: SPRING_REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: backend
+                  key: SPRING_REDIS_PASSWORD
+            - name: APP_TOKEN_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: backend
+                  key: APP_TOKEN_SECRET
 ---
 apiVersion: v1
 kind: Service
