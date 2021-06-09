@@ -26,6 +26,13 @@ public class EmailBusiness {
     }
 
     public  void sendActivateUserEmail(String email,String name,String token) throws EmailException {
+//
+//        String html = null;
+//        try{
+//             html  = readEmailTemplate("email-activate-user.html");
+//        }catch (IOException e){
+//            throw EmailException.templateNotFound();
+//        }
 
 //        String html = null;
 //        try{
