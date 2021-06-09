@@ -27,22 +27,22 @@ public class EmailBusiness {
 
     public  void sendActivateUserEmail(String email,String name,String token) throws EmailException {
 
-        String html = null;
-        try{
-             html  = readEmailTemplate("email-activate-user.html");
-        }catch (IOException e){
-            throw EmailException.templateNotFound();
-        }
+//        String html = null;
+//        try{
+//             html  = readEmailTemplate("email-activate-user.html");
+//        }catch (IOException e){
+//            throw EmailException.templateNotFound();
+//        }
 
         log.info("Token= " + token);
 
         String finalLink = "http://localhost:4200/activate/"+token;
-        html = html.replace("${P_NAME}",name);
-        html = html.replace("${P_LINK}",finalLink);
-        log.info("html"+html);
+//        html = html.replace("${P_NAME}",name);
+//        html = html.replace("${P_LINK}",finalLink);
+        log.info("finalLink"+finalLink);
         EmailRequest request = new EmailRequest();
         request.setTo(email);
-        request.setContent(html);
+        request.setContent(finalLink);
         request.setSubject("Please activate your account");
 
 
@@ -66,6 +66,6 @@ public class EmailBusiness {
 
     private String readEmailTemplate(String filename) throws IOException {
        File file= ResourceUtils.getFile("classpath:email/"+filename);
-        return FileCopyUtils.copyToString(new FileReader(file));
+       return FileCopyUtils.copyToString(new FileReader(file));
     }
 }
