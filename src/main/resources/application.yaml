@@ -3,7 +3,6 @@ server:
 spring:
   kafka:
     bootstrap-servers: localhost:9092
-    hostname
     consumer:
       group-id: "my-awesome-app"
   mail:
