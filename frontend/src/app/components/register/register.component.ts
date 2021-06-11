@@ -43,6 +43,9 @@ export class RegisterComponent implements OnInit {
     );
   }
   onChange(value: string): void {
+    const rule1 = this.registerFormGroup.controls.checkPasswordRule1;
     console.log(value);
+
+    /[^A-Za-z0-9_.]/.test(value) ? rule1.setValue(true) : rule1.setValue(false);
   }
 }
