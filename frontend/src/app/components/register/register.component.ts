@@ -14,6 +14,9 @@ export class RegisterComponent implements OnInit {
     email: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
     name: new FormControl('', Validators.required),
+
+    checkPasswordRule1: new FormControl('', Validators.required),
+    checkPasswordRule2: new FormControl('', Validators.required),
   });
 
   constructor(private userService: UserService, private router: Router) {}
@@ -38,5 +41,8 @@ export class RegisterComponent implements OnInit {
         alert(error.error.error);
       }
     );
+  }
+  onChange(value: string): void {
+    console.log(value);
   }
 }
