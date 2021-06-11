@@ -1,43 +1,90 @@
-<form
-  [formGroup]="registerFormGroup"
-  class="d-grid gap-2 col-6 mx-auto"
-  (ngSubmit)="onSubmit()"
->
-  <h2 class="text-center">Register</h2>
-  <div class="mb-3">
-    <label for="name" class="form-label">Name</label>
-    <input
-      type="text"
-      class="form-control"
-      formControlName="name"
-      placeholder="Name"
-    />
+<div class="container-fluid">
+  <div class="row no-gutter">
+    <!-- The image half -->
+    <div class="col-md-6 d-none d-md-flex bg-image"></div>
+
+    <!-- The content half -->
+    <div class="col-md-6 bg-light">
+      <div class="login d-flex align-items-center py-5">
+        <!-- Demo content-->
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-10 col-xl-7 mx-auto">
+              <h3 class="display-4">สมัครใช้งาน</h3>
+              <p class="text-muted mb-4">
+                หลักจาก SING IN สำเร็จโปรดยืนยัน Email
+              </p>
+              <form>
+                <div class="form-group mb-3">
+                  <input
+                    type="text"
+                    placeholder="Name and LastName"
+                    required=""
+                    autofocus=""
+                    class="form-control rounded-pill border-0 shadow-sm px-4"
+                  />
+                </div>
+                <div class="form-group mb-3">
+                  <input
+                    type="email"
+                    placeholder="Email"
+                    required=""
+                    autofocus=""
+                    class="form-control rounded-pill border-0 shadow-sm px-4"
+                  />
+                </div>
+                <div class="form-group mb-3">
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    required=""
+                    class="
+                      form-control
+                      rounded-pill
+                      border-0
+                      shadow-sm
+                      px-4
+                      text-primary
+                    "
+                  />
+                </div>
+                <!-- <div class="custom-control custom-checkbox mb-3">
+                  <input
+                    id="customCheck1"
+                    type="checkbox"
+                    checked
+                    class="custom-control-input"
+                  />
+                  <label for="customCheck1" class="custom-control-label"
+                    >Remember password</label
+                  >
+                </div> -->
+                <button
+                  type="submit"
+                  class="
+                    btn btn-primary btn-block
+                    text-uppercase
+                    mb-2
+                    rounded-pill
+                    shadow-sm
+                  "
+                >
+                  Sign in
+                </button>
+                <div class="text-center d-flex justify-content-between mt-4">
+                  <ul>
+                    <li>dsfdf</li>
+                    <li>dsfdf</li>
+                    <li>dsfdf</li>
+                  </ul>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- End -->
+      </div>
+    </div>
+    <!-- End -->
   </div>
-  <div class="mb-3">
-    <label for="email" class="form-label">Email</label>
-    <input
-      type="email"
-      class="form-control"
-      formControlName="email"
-      placeholder="name@example.com"
-    />
-  </div>
-  <div class="mb-3">
-    <label for="password" class="form-label">Password</label>
-    <input
-      type="password"
-      class="form-control"
-      formControlName="password"
-      placeholder="Password"
-    />
-  </div>
-  <div class="mb-3">
-    <button
-      type="submit"
-      class="btn btn-primary mb-3"
-      [disabled]="registerFormGroup.invalid"
-    >
-      Submit
-    </button>
-  </div>
-</form>
+</div>
