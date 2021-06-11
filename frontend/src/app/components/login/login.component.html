@@ -1,34 +1,100 @@
-<form
-  [formGroup]="loginFormGroup"
-  class="d-grid gap-2 col-6 mx-auto"
-  (ngSubmit)="onSubmit()"
->
-  <h2 class="text-center">Login</h2>
-  <div class="mb-3">
-    <label for="email" class="form-label">Email</label>
-    <input
-      type="email"
-      class="form-control"
-      formControlName="email"
-      placeholder="name@example.com"
-    />
+<div class="container-fluid">
+  <div class="row no-gutter">
+    <!-- The image half -->
+    <div class="col-md-6 d-none d-md-flex bg-image"></div>
+
+    <!-- The content half -->
+    <div class="col-md-6 bg-light">
+      <div class="login d-flex align-items-center py-5">
+        <!-- Demo content-->
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-10 col-xl-7 mx-auto">
+              <h3 class="display-4">
+                เข้าสู่ระบบ
+                <img
+                  src="../../../assets/svg/angular.svg"
+                  height="75"
+                  width="75"
+                />
+              </h3>
+              <p class="text-muted mb-4">
+                create login <img src="../../../assets/svg/springboot.svg" />
+              </p>
+              <form [formGroup]="loginFormGroup" (ngSubmit)="onSubmit()">
+                <div class="form-group mb-3">
+                  <input
+                    type="email"
+                    placeholder="Email address"
+                    required=""
+                    autofocus=""
+                    formControlName="email"
+                    class="form-control rounded-pill border-0 shadow-sm px-4"
+                  />
+                </div>
+                <div class="form-group mb-3">
+                  <input
+                    formControlName="password"
+                    type="password"
+                    placeholder="Password"
+                    required=""
+                    class="
+                      form-control
+                      rounded-pill
+                      border-0
+                      shadow-sm
+                      px-4
+                      text-primary
+                    "
+                  />
+                </div>
+                <!-- <div class="custom-control custom-checkbox mb-3">
+                  <input
+                    id="customCheck1"
+                    type="checkbox"
+                    checked
+                    class="custom-control-input"
+                  />
+                  <label for="customCheck1" class="custom-control-label"
+                    >Remember password</label
+                  >
+                </div> -->
+                <button
+                  type="submit"
+                  [disabled]="loginFormGroup.invalid"
+                  class="
+                    btn btn-primary btn-block
+                    text-uppercase
+                    mb-3
+                    rounded-pill
+                    shadow-sm
+                  "
+                >
+                  Sign in
+                </button>
+                <div class="text-center d-flex justify-content-between mt-4">
+                  <p>
+                    หากยังใหม่กับการใช้ <a href="#"> สมัครลงทะเบียนตอนนี้</a>
+                  </p>
+                </div>
+                <div class="text-center d-flex justify-content-between mt-4">
+                  <p>
+                    <img src="../../../assets/svg/redis.svg" />
+                    <img
+                      src="../../../assets/svg/apache_kafka-ar21.svg"
+                      class="test"
+                    />
+                    <img src="../../../assets/svg/docker.svg" />
+                  </p>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- End -->
+      </div>
+    </div>
+    <!-- End -->
   </div>
-  <div class="mb-3">
-    <label for="password" class="form-label">Password</label>
-    <input
-      type="password"
-      class="form-control"
-      formControlName="password"
-      placeholder="Password"
-    />
-  </div>
-  <div class="mb-3">
-    <button
-      type="submit"
-      class="btn btn-primary mb-3"
-      [disabled]="loginFormGroup.invalid"
-    >
-      Submit
-    </button>
-  </div>
-</form>
+</div>
+<!-- https://jsfiddle.net/bootstrapious/j80aheo9/ -->
