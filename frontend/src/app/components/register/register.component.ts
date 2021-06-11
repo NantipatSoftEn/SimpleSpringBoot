@@ -43,9 +43,27 @@ export class RegisterComponent implements OnInit {
     );
   }
   onChange(value: string): void {
-    const rule1 = this.registerFormGroup.controls.checkPasswordRule1;
     console.log(value);
+    this.checkRulePassword(value);
+  }
 
-    /[^A-Za-z0-9_.]/.test(value) ? rule1.setValue(true) : rule1.setValue(false);
+  checkRulePassword(p: string): void {
+    const rule1 = this.registerFormGroup.controls.checkPasswordRule1;
+    const rule2 = this.registerFormGroup.controls.checkPasswordRule2;
+    var strRegExp = /^[a-zA-Z0-9]*$/;
+    var strAndRangeRegExp = /^[a-zA-Z0-9]{8,25}$/;
+    if (strRegExp.test(p)) {
+      rule1.setValue(true);
+      if (strAndRangeRegExp.test(p)) {
+        rule2.setValue(true);
+      } else {
+        rule2.setValue(false);
+      }
+    } else {
+      rule1.setValue(false);
+    }
+    if (p === '') {
+      rule1.setValue(false);
+    }
   }
 }
