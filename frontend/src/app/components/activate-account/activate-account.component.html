@@ -11,12 +11,37 @@
           <div class="row">
             <div class="col-lg-10 col-xl-7 mx-auto">
               <h3 class="display-4">Activate Email</h3>
-
+              <p id="simpleUsage"></p>
               <p class="text-muted mb-4">
                 Unable to activate your account.
                 <br />ไม่สามารถเปิดใช้งานบัญชีของคุณได้
               </p>
-              <p class="mb-4 text-primary">{{ errorMessage }}</p>
+              <p id="simpleUsage"></p>
+              <p class="mb-4 text-primary">
+                <img
+                  src="../../../assets/images/email.png"
+                  height="50"
+                  width="50"
+                />
+                {{ errorMessage }}
+              </p>
+              <button
+                class="
+                  btn btn-primary btn-block
+                  text-uppercase
+                  mb-2
+                  rounded-pill
+                  shadow-sm
+                "
+                [routerLink]="['/login']"
+              >
+                <img
+                  src="../../../assets/images/lets-go.png"
+                  height="45"
+                  width="45"
+                />
+                ไปหน้า Sign in
+              </button>
             </div>
           </div>
         </div>
