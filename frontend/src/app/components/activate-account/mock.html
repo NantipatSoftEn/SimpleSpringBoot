@@ -1,0 +1,45 @@
+<!--              <h2 class="display-6">Activate Account</h2>
+
+              <div *ngIf="isSuccess === true">
+                <p>Your account has been activated.</p>
+                <a [routerLink]="['/login']">Click here to login</a>
+              </div>
+
+              <div *ngIf="isSuccess === false">
+                <p class="text-muted mb-4">
+                  Unable to activate your account.
+                  <br />ไม่สามารถเปิดใช้งานบัญชีของคุณได้
+                </p>
+                <p class="text-muted mb-4">ข้อความ: {{ errorMessage }}</p>
+
+                <div *ngIf="isErrorTokenExpired">
+                  <button
+                    (click)="resendActivationEmail()"
+                    class="
+                      btn btn-primary btn-block
+                      text-uppercase
+                      mb-2
+                      rounded-pill
+                      shadow-sm
+                    "
+                  >
+                    Resend Activation Email
+                  </button>
+                </div>
+
+                <div *ngIf="isErrorAccountAlreadyActivated">
+                  <button
+                    (click)="navigateToLoginPage()"
+                    class="
+                      btn btn-primary btn-block
+                      text-uppercase
+                      mb-2
+                      rounded-pill
+                      shadow-sm
+                    "
+                  >
+                    ไปหน้า SIGN IN
+                  </button>
+                </div> -->
+
+<!-- https://codepen.io/sfrisk/pen/Kxvbdy -->

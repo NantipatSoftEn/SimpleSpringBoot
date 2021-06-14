@@ -1,19 +1,28 @@
-<p>activate-account works!</p>
+<div class="container-fluid">
+  <div class="row no-gutter">
+    <!-- The image half -->
+    <div class="col-md-6 d-none d-md-flex bg-image"></div>
 
-<div *ngIf="isSuccess === true">
-  <p>Your account has been activated.</p>
-  <a [routerLink]="['/login']">Click here to login</a>
-</div>
+    <!-- The content half -->
+    <div class="col-md-6 bg-light">
+      <div class="login d-flex align-items-center py-5">
+        <!-- Demo content-->
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-10 col-xl-7 mx-auto">
+              <h3 class="display-4">Activate Email</h3>
 
-<div *ngIf="isSuccess === false">
-  <p>Unable to activate your account.</p>
-  <p>{{ errorMessage }}</p>
-
-  <div *ngIf="isErrorTokenExpired">
-    <button (click)="resendActivationEmail()">Resend Activation Email</button>
-  </div>
-
-  <div *ngIf="isErrorAccountAlreadyActivated">
-    <button (click)="navigateToLoginPage()">Login</button>
+              <p class="text-muted mb-4">
+                Unable to activate your account.
+                <br />ไม่สามารถเปิดใช้งานบัญชีของคุณได้
+              </p>
+              <p class="mb-4 text-primary">{{ errorMessage }}</p>
+            </div>
+          </div>
+        </div>
+        <!-- End -->
+      </div>
+    </div>
+    <!-- End -->
   </div>
 </div>
