@@ -20,7 +20,7 @@
                     type="text"
                     placeholder="Name"
                     formControlName="name"
-                    required=""
+                    required="required"
                     autofocus=""
                     class="form-control rounded-pill border-0 shadow-sm px-4"
                   />
@@ -30,7 +30,7 @@
                     type="email"
                     placeholder="Email"
                     formControlName="email"
-                    required=""
+                    required="required"
                     autofocus=""
                     class="form-control rounded-pill border-0 shadow-sm px-4"
                   />
@@ -38,9 +38,9 @@
                 <div class="form-group mb-3 pass_show input-icons">
                   <input
                     type="password"
+                    required="required"
                     placeholder="Password"
                     formControlName="password"
-                    required=""
                     class="
                       form-control
                       rounded-pill
@@ -53,15 +53,7 @@
                   />
                 </div>
                 <div class="custom-control custom-checkbox mb-3">
-                  <input
-                    id="customCheck1"
-                    type="checkbox"
-                    checked
-                    class="custom-control-input"
-                  />
-                  <label for="customCheck1" class="custom-control-label"
-                    >look password</label
-                  >
+                  <button></button>
                 </div>
                 <button
                   type="submit"
@@ -85,8 +77,11 @@
                     type="checkbox"
                     value=""
                     formControlName="checkPasswordRule1"
+                    onclick="return false;"
+                    required="required"
                   />
                   <label class="form-check-label" for="checkPasswordRule1">
+                    <img src="../../../assets/svg/mat.svg" />
                     English and numbers characters only
                   </label>
                 </div>
@@ -96,8 +91,11 @@
                     type="checkbox"
                     value=""
                     formControlName="checkPasswordRule2"
+                    onclick="return false;"
+                    required="required"
                   />
                   <label class="form-check-label" for="checkPasswordRule2">
+                    <img src="../../../assets/svg/password.svg" />
                     8-25 characters
                   </label>
                 </div>
@@ -107,8 +105,11 @@
                     type="checkbox"
                     value=""
                     formControlName="checkPasswordRule3"
+                    onclick="return false;"
+                    required="required"
                   />
                   <label class="form-check-label" for="checkPasswordRule3">
+                    <img src="../../../assets/svg/a.svg" />
                     At least 1 capital characters
                   </label>
                 </div>
