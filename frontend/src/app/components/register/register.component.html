@@ -35,9 +35,9 @@
                     class="form-control rounded-pill border-0 shadow-sm px-4"
                   />
                 </div>
-                <div class="form-group mb-3 pass_show input-icons">
+                <div class="form-group mb-3 has-feedback">
                   <input
-                    type="password"
+                    [type]="fieldTextType ? 'text' : 'password'"
                     required="required"
                     placeholder="Password"
                     formControlName="password"
@@ -51,10 +51,15 @@
                     "
                     (ngModelChange)="onChange($event)"
                   />
+                  <p>
+                    <img
+                      src="{{ '../../../assets/svg/' + pathImages }}"
+                      (click)="toggleFieldTextType()"
+                    />
+                    password
+                  </p>
                 </div>
-                <div class="custom-control custom-checkbox mb-3">
-                  <button></button>
-                </div>
+
                 <button
                   type="submit"
                   [disabled]="registerFormGroup.invalid"

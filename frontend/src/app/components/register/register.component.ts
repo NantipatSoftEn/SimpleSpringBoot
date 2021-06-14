@@ -20,6 +20,8 @@ export class RegisterComponent implements OnInit {
     checkPasswordRule3: new FormControl('', Validators.required),
   });
 
+  fieldTextType = false;
+  pathImages = 'eye.svg';
   constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {}
@@ -48,8 +50,13 @@ export class RegisterComponent implements OnInit {
     this.checkRulePassword(value);
   }
 
-  onClick(): void {
-    console.log(`Onclick`);
+  toggleFieldTextType() {
+    this.fieldTextType = !this.fieldTextType;
+    if (this.fieldTextType) {
+      this.pathImages = 'eye.svg';
+    } else {
+      this.pathImages = 'private.svg';
+    }
   }
 
   checkRulePassword(p: string): void {
