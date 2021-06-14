@@ -17,6 +17,7 @@ export class RegisterComponent implements OnInit {
 
     checkPasswordRule1: new FormControl('', Validators.required),
     checkPasswordRule2: new FormControl('', Validators.required),
+    checkPasswordRule3: new FormControl('', Validators.required),
   });
 
   constructor(private userService: UserService, private router: Router) {}
@@ -42,28 +43,40 @@ export class RegisterComponent implements OnInit {
       }
     );
   }
+
   onChange(value: string): void {
-    console.log(value);
     this.checkRulePassword(value);
+  }
+
+  onClick(): void {
+    console.log(`Onclick`);
   }
 
   checkRulePassword(p: string): void {
     const rule1 = this.registerFormGroup.controls.checkPasswordRule1;
     const rule2 = this.registerFormGroup.controls.checkPasswordRule2;
-    var strRegExp = /^[a-zA-Z0-9]*$/;
-    var strAndRangeRegExp = /^[a-zA-Z0-9]{8,25}$/;
-    if (strRegExp.test(p)) {
-      rule1.setValue(true);
-      if (strAndRangeRegExp.test(p)) {
-        rule2.setValue(true);
-      } else {
-        rule2.setValue(false);
-      }
-    } else {
-      rule1.setValue(false);
-    }
+    const rule3 = this.registerFormGroup.controls.checkPasswordRule3;
+
+    const strRegExp = /^[a-zA-Z0-9]*$/;
+    const strAndRangeRegExp = /^[a-zA-Z0-9]{8,25}$/;
+    const strCapitalRegExp = /[A-Z]/;
+
+    this.IsRuleCorrect(p, strRegExp, rule1);
+    this.IsRuleCorrect(p, strAndRangeRegExp, rule2);
+    this.IsRuleCorrect(p, strCapitalRegExp, rule3);
+
     if (p === '') {
       rule1.setValue(false);
+    }
+  }
+
+  IsRuleCorrect(password: string, RegExp: RegExp, rule: any): boolean {
+    if (RegExp.test(password)) {
+      rule.setValue(true);
+      return true;
+    } else {
+      rule.setValue(false);
+      return false;
     }
   }
 }
