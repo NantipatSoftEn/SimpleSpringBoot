@@ -10,10 +10,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @Log4j2
@@ -90,4 +87,7 @@ public class UserService {
         return repository.save(entity);
     }
 
+    public List<User> getAllUsers(){
+        return (List<User>) repository.findAll();
+    }
 }

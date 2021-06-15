@@ -207,6 +207,9 @@ public class UserBusiness {
         sendEmail(user);
     }
 
+    public List<User> getAllUsers() {
+        return (List<User>) userService.getAllUsers();
+    }
 
     private Date nextXMinute(int minute){
         Calendar calendar = Calendar.getInstance();

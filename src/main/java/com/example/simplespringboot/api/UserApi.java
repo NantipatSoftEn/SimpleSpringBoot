@@ -12,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/user")
 public class UserApi {
@@ -74,6 +76,12 @@ public class UserApi {
     @RequestMapping("/upload")
     public ResponseEntity<String> uploadProfilePicture(@RequestPart MultipartFile file) throws FileException {
         String response = business.uploadProfilePicture(file);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<User>> getAllUsers() {
+        List<User> response = business.getAllUsers();
         return ResponseEntity.ok(response);
     }
 }
