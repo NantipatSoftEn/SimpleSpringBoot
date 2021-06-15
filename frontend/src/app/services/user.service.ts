@@ -1,9 +1,11 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 import { ILoginResponse } from '../interfaces/i-login-response';
 import { IRegisterResponse } from '../interfaces/i-register-response';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-const url = 'http://localhost:8080/user';
+
+const URL = 'http://localhost:8080/user';
 @Injectable({
   providedIn: 'root',
 })
@@ -15,7 +17,7 @@ export class UserService {
       email: email,
       password: password,
     };
-    return this.http.post<ILoginResponse>(`${url}/login`, body);
+    return this.http.post<ILoginResponse>(`${URL}/login`, body);
   }
 
   register(
@@ -28,20 +30,30 @@ export class UserService {
       password: password,
       name: name,
     };
-    return this.http.post<IRegisterResponse>(`${url}/register`, body);
+    return this.http.post<IRegisterResponse>(`${URL}/register`, body);
   }
 
   activateAccount(token: string): Observable<any> {
     let body = {
       token: token,
     };
-    return this.http.post<any>(`${url}/activate`, body);
+    return this.http.post<any>(`${URL}/activate`, body);
   }
 
   resendActivationEmail(token: string) {
     let body = {
       token: token,
     };
-    return this.http.post<any>(`${url}/resend-activation-email`, body);
+    return this.http.post<any>(`${URL}/resend-activation-email`, body);
+  }
+
+  getAllUsers(token: string) {
+    let headers = new HttpHeaders();
+    headers = headers
+      .set('Content-Type', 'application/json; charset=utf-8')
+      .set('Authorization', `Bearer ${token}`);
+    return this.http.get<any>(`${URL}/resend-activation-email`, {
+      headers: headers,
+    });
   }
 }
