@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit(): void {
+    this.router.navigate(['/loading']);
     if (this.loginFormGroup.invalid) {
       return;
     }
@@ -40,6 +41,7 @@ export class LoginComponent implements OnInit {
       },
       (error) => {
         alert(error.error.error);
+        this.router.navigate(['/login']);
       }
     );
   }
