@@ -16,6 +16,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './components/register/register.component';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { LoadingComponent } from './loading/loading.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -29,6 +30,7 @@ export function createTranslateLoader(http: HttpClient) {
     DashboardComponent,
     HeaderComponent,
     ActivateAccountComponent,
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,27 @@
+#sparkles > path {
+  animation: sparklyBits 1000ms infinite;
+  position: absolute;
+}
+
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+}
+
+@for $i from 1 through 29 {
+  #sparkles > path:nth-child(#{$i}) {
+    animation-delay: (35ms * $i);
+  }
+}
+
+@keyframes sparklyBits {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

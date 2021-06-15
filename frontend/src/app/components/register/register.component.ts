@@ -27,6 +27,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit(): void {
+    this.router.navigate(['/loading']);
     if (this.registerFormGroup.invalid) {
       return;
     }
@@ -42,6 +43,7 @@ export class RegisterComponent implements OnInit {
       },
       (error) => {
         alert(error.error.error);
+        this.router.navigate(['/register']);
       }
     );
   }
