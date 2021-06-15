@@ -1,6 +1,7 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
+import { AppCookieService } from 'src/app/services/app-cookie.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -13,15 +14,15 @@ export class DashboardComponent implements OnInit {
   constructor(
     private userService: UserService,
     private router: Router,
-    private activateRoute: ActivatedRoute
+    private activateRoute: ActivatedRoute,
+    private appCookieService: AppCookieService
   ) {}
 
   ngOnInit(): void {
-    this.token = this.activateRoute.snapshot.paramMap.get(`token`);
-    if (this.token === null) {
-      this.router.navigate([`/login`]);
-      return;
-    }
-    this.userService.getAllUsers(this.token);
+    this.token = this.appCookieService.getAccessToken();
+    console.log(this.token);
+
+    let users = this.userService.getAllUsers(this.token);
+    console.log(`users`, users);
   }
 }

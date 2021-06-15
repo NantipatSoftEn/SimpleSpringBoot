@@ -47,13 +47,16 @@ export class UserService {
     return this.http.post<any>(`${URL}/resend-activation-email`, body);
   }
 
-  getAllUsers(token: string) {
+  async getAllUsers(token: string) {
     let headers = new HttpHeaders();
     headers = headers
       .set('Content-Type', 'application/json; charset=utf-8')
       .set('Authorization', `Bearer ${token}`);
-    return this.http.get<any>(`${URL}/resend-activation-email`, {
+    return this.http.get<any>(`${URL}/all`, {
       headers: headers,
     });
+    // .subscribe((data) => {
+    //   return data;
+    // });
   }
 }
