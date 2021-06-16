@@ -3,7 +3,10 @@
   style="background-color: #e3f2fd"
 >
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Frontend</a>
+    <a class="navbar-brand" href="#">
+      <img src="../../../assets/svg/angular.svg" />
+    </a>
+
     <button
       class="navbar-toggler"
       type="button"
@@ -47,9 +50,14 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" (click)="doLogout()">{{
-            "header.menu.logout" | translate
-          }}</a>
+          <button
+            type="button"
+            class="btn btn-danger"
+            aria-current="page"
+            (click)="doLogout()"
+          >
+            {{ "header.menu.logout" | translate }}
+          </button>
         </li>
       </ul>
     </div>
