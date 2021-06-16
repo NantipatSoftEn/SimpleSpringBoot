@@ -5,6 +5,35 @@
     <div class="chat-wrapper">
       <div class="chat-title">Web Socket</div>
       <div class="chat-view">
+        <div *ngFor="let message of messages">
+          <div class="chat-item">
+            <div class="d-flex">
+              <img
+                src="../../../assets/images/profile.png"
+                height="25"
+                width="25"
+              />
+              <div class="p-1">
+                <div class="d-flex align-items-end">
+                  <div class="sender-name"><a href="#">#Surya Prakash</a></div>
+                  <div class="chat-time">09:54 24/05/21</div>
+                </div>
+                <div class="float-right">
+                  <button
+                    type="button"
+                    class="dropdown-btn btn-tr p-2"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    <i class="fas fa-ellipsis-v"></i>
+                  </button>
+                </div>
+                <div class="chat-text">{{ message }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="chat-item">
           <div class="d-flex">
             <img
@@ -27,11 +56,6 @@
                 >
                   <i class="fas fa-ellipsis-v"></i>
                 </button>
-                <div class="dropdown-menu">
-                  <!-- Dropdown menu links -->
-                  <a class="dropdown-item" href="#">Report</a>
-                  <a class="dropdown-item" href="#">Block</a>
-                </div>
               </div>
               <div class="chat-text">Hello guys! lets get into the party</div>
             </div>
