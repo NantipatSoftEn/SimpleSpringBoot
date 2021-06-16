@@ -1,0 +1,18 @@
+<app-header></app-header>
+<div>Connected:{{ isConected }}</div>
+<form [formGroup]="chatFormGroup" (ngSubmit)="onSubmit()">
+  <input type="text" formControlName="message" placeholder="Message" />
+  <button
+    type="submit"
+    class="btn btn-primary"
+    [disabled]="chatFormGroup.invalid"
+  >
+    Send
+  </button>
+</form>
+<h3>Messages</h3>
+<ul>
+  <li *ngFor="let message of messages">
+    {{ message.from }} - {{ message.message }} - {{ message.created }}
+  </li>
+</ul>
