@@ -24,6 +24,8 @@
 /*-----------------------LIVE CHAT-------------------------*/
 .cgl-live-chat {
   max-width: 550px;
+  width: 100%;
+  height: 50%;
 }
 .cgl-live-chat .chat-wrapper {
   background-color: rgb(255, 255, 255);
@@ -93,7 +95,7 @@
   line-height: 11px;
   padding-left: 8px;
   padding-right: 8px;
-  color: rgb(255, 255, 255);
+  color: #060302;
 }
 
 .cgl-live-chat .chat-wrapper .chat-view .chat-time i {
@@ -145,6 +147,7 @@
   color: #070707;
   outline: none !important;
   border-radius: 5px;
+  width: 90%;
 }
 
 .cgl-live-chat .chat-wrapper .chat-message {
