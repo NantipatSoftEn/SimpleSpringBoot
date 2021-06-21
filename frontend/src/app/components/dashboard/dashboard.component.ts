@@ -22,10 +22,18 @@ export class DashboardComponent implements OnInit {
     this.token = this.appCookieService.getAccessToken();
     console.log(this.token);
 
-    this.userService.getAllUsers(this.token).subscribe((data) => {
-      console.log(data);
-      this.users = data;
-    });
+    this.userService.getAllUsers(this.token).subscribe(
+      (data) => {
+        this.users = data;
+      },
+      (error) => {
+        console.log('oops', error);
+        if (error.status === 403) {
+          this.appCookieService.deleteAccessToken();
+          this.router.navigate(['/login']);
+        }
+      }
+    );
     // console.log(`users`, users.subscribe());
   }
 }
