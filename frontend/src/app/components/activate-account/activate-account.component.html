@@ -12,19 +12,37 @@
             <div class="col-lg-10 col-xl-7 mx-auto">
               <h3 class="display-4">Activate Email</h3>
               <p id="simpleUsage"></p>
-              <p class="text-muted mb-4">
-                Unable to activate your account.
-                <br />ไม่สามารถเปิดใช้งานบัญชีของคุณได้
-              </p>
+              <div *ngIf="isSuccess === true">
+                <p>Your account has been activated.</p>
+              </div>
+
               <p id="simpleUsage"></p>
-              <p class="mb-4 text-primary">
-                <img
-                  src="../../../assets/images/email.png"
-                  height="50"
-                  width="50"
-                />
-                {{ errorMessage }}
-              </p>
+              <div *ngIf="isSuccess === false">
+                <p>Unable to activate your account.</p>
+                <p class="mb-4 text-primary">
+                  <img
+                    src="../../../assets/images/email.png"
+                    height="50"
+                    width="50"
+                  />
+                  {{ errorMessage }}
+                </p>
+                <div *ngIf="isErrorTokenExpired">
+                  <button
+                    class="
+                      btn btn-primary btn-block
+                      text-uppercase
+                      mb-2
+                      rounded-pill
+                      shadow-sm
+                    "
+                    (click)="resendActivationEmail()"
+                  >
+                    Resend Activation Email
+                  </button>
+                </div>
+              </div>
+
               <button
                 class="
                   btn btn-primary btn-block
