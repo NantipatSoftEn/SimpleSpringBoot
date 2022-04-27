@@ -10,5 +10,3 @@ RUN ng build --prod
 
 FROM nginx:1.19.10-alpine
 COPY --from=builder /myweb/dist/demo /usr/share/nginx/html
-sd
-sd
