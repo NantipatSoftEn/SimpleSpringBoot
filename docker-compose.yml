@@ -28,13 +28,13 @@ services:
       - kafka
     restart: always
     deploy:
-      resources:
-        limits:
-          cpus: 0.50
-          memory: 512M
-        reservations:
-          cpus: 0.25
-          memory: 128M
+      # resources:
+      #   limits:
+      #     cpus: 0.50
+      #     memory: 512M
+      #   reservations:
+      #     cpus: 0.25
+      #     memory: 128M
   #  email:
   #    container_name: email
   #    build: ../email/
