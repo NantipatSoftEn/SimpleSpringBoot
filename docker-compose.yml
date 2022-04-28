@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 services:
   backend:
@@ -22,39 +22,47 @@ services:
       SPRING_KAFKA_BOOTSTRAP_SERVERS: ${SECRET_KAFKA_HOST}:${SECRET_KAFKA_PORT}
       SPRING_KAFKA_CONSUMER_GROUP_ID: ${SECRET_KAFKA_CONSUMER_GROUP_ID}
 
-      APP_TOKEN_SECRET:  ${SECRET_JWT_SECRET}
+      APP_TOKEN_SECRET: ${SECRET_JWT_SECRET}
       APP_TOKEN_ISSURE: BackendService
     depends_on:
       - kafka
     restart: always
-#  email:
-#    container_name: email
-#    build: ../email/
-#    image: email
-#    ports:
-#      - 8082:8082
-#    environment:
-#      SPRING_KAFKA_BOOTSTRAP_SERVERS: ${SECRET_KAFKA_HOST}:${SECRET_KAFKA_PORT}
-#      SPRING_KAFKA_CONSUMER_GROUP_ID: ${SECRET_KAFKA_CONSUMER_GROUP_ID}
-#      SPRING_MAIL_HOST: ${SECRET_MAIL_HOST}
-#      SPRING_MAIL_PORT: ${SECRET_MAIL_POST}
-#      SECRET_MAIL_USERNAME: ${SECRET_MAIL_USERNAME}
-#      SECRET_MAIL_PASSWORD: ${SECRET_MAIL_PASSWORD}
-#      SPRING_MAIL_PRPPERTIES_MAIL_SMTP_AUTH: ${SECRET_MAIL_PRPPERTIES_MAIL_SMTP_AUTH}
-#      SPRING_MAIL_PRPPERTIES_MAIL_SMTP_STARTTLS_ENABLE: ${SECRET_MAIL_PRPPERTIES_MAIL_SMTP_STARTTLS_ENABLE}
-#
-#      APP_TOKEN_SECRET: ${SECRET_JWT_SECRET}
-#      APP_TOKEN_ISSURE: BackendService
-#    depends_on:
-#      - kafka
-#    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: 0.50
+          memory: 512M
+        reservations:
+          cpus: 0.25
+          memory: 128M
+  #  email:
+  #    container_name: email
+  #    build: ../email/
+  #    image: email
+  #    ports:
+  #      - 8082:8082
+  #    environment:
+  #      SPRING_KAFKA_BOOTSTRAP_SERVERS: ${SECRET_KAFKA_HOST}:${SECRET_KAFKA_PORT}
+  #      SPRING_KAFKA_CONSUMER_GROUP_ID: ${SECRET_KAFKA_CONSUMER_GROUP_ID}
+  #      SPRING_MAIL_HOST: ${SECRET_MAIL_HOST}
+  #      SPRING_MAIL_PORT: ${SECRET_MAIL_POST}
+  #      SECRET_MAIL_USERNAME: ${SECRET_MAIL_USERNAME}
+  #      SECRET_MAIL_PASSWORD: ${SECRET_MAIL_PASSWORD}
+  #      SPRING_MAIL_PRPPERTIES_MAIL_SMTP_AUTH: ${SECRET_MAIL_PRPPERTIES_MAIL_SMTP_AUTH}
+  #      SPRING_MAIL_PRPPERTIES_MAIL_SMTP_STARTTLS_ENABLE: ${SECRET_MAIL_PRPPERTIES_MAIL_SMTP_STARTTLS_ENABLE}
+  #
+  #      APP_TOKEN_SECRET: ${SECRET_JWT_SECRET}
+  #      APP_TOKEN_ISSURE: BackendService
+  #    depends_on:
+  #      - kafka
+  #    restart: always
   db:
     image: postgres
     container_name: db
     ports:
       - "5432:5432"
-#    volumes:
-#      - pg-dataset:/var/lib/postgresql/data
+    #    volumes:
+    #      - pg-dataset:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: ${SECRET_DB_PASSWORD}
       POSTGRES_DB: ${SECRET_DB_NAME}
@@ -85,13 +93,11 @@ services:
     links:
       - zookeeper
   redis:
-    image: 'bitnami/redis'
+    image: "bitnami/redis"
     container_name: redis
     ports:
       - "6379:6379"
     environment:
       REDIS_PASSWORD: ${SECRET_REDIS_PASSWORD}
-
-
 # https://mrchoke.medium.com/phpmyadmin-%E0%B8%A0%E0%B8%B2%E0%B8%84%E0%B8%9E%E0%B8%B4%E0%B8%A8%E0%B8%94%E0%B8%B2%E0%B8%A3-675b6f9ce9f
 # เวลาต่อ postgres ใช้ ip 172.17.0.1
