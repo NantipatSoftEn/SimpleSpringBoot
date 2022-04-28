@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { IChatResponse } from '../interfaces/i-chat-response';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-const URL = 'http://localhost:8080/chat/message';
+const URL = 'http://206.189.35.196:8080//chat/message';
 @Injectable({
   providedIn: 'root',
 })

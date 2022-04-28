@@ -5,7 +5,7 @@ import { IRegisterResponse } from '../interfaces/i-register-response';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-const URL = 'http://localhost:8080/user';
+const URL = 'http://206.189.35.196:8080//user';
 @Injectable({
   providedIn: 'root',
 })
