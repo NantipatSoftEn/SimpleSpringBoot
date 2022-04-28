@@ -27,11 +27,11 @@ services:
     depends_on:
       - kafka
     restart: always
-    deploy:
-      resources:
-        limits:
-          cpus: 0.30
-          memory: 512M
+    # deploy:
+    #   resources:
+    #     limits:
+    #       cpus: 0.50
+    #       memory: 512M
   #  email:
   #    container_name: email
   #    build: ../email/
