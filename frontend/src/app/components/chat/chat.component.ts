@@ -15,7 +15,7 @@ import { IChatMessage } from '../../interfaces/i-chat-message';
 export class ChatComponent implements OnInit {
   private stompClient: any;
   private CHANNEL = `/topic/chat`;
-  private ENDPOINT = `http://localhost:8080/socket`;
+  private ENDPOINT = `http://206.189.35.196:8080/socket`;
   messages: IChatMessage[] = [];
   isConected = false;
 

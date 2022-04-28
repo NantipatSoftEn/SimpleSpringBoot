@@ -42,7 +42,7 @@ public class EmailBusiness {
 
         log.info("Token= " + token);
 
-        String finalLink = "http://localhost:4200/activate/"+token;
+        String finalLink = "http://206.189.35.196:8181/activate/"+token;
 //        html = html.replace("${P_NAME}",name);
 //        html = html.replace("${P_LINK}",finalLink);
         log.info("finalLink"+finalLink);
