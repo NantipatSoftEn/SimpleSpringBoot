@@ -8,5 +8,5 @@
 
 
 FROM openjdk:15-jdk-alpine
-COPY --from=build /home/app/target/app.jar app.jar
+COPY --from=build app.jar app.jar
 ENTRYPOINT ["java","-jar","/app.jar"]
