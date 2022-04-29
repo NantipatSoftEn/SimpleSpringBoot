@@ -21,6 +21,10 @@
               <p class="text-muted mb-4">
                 create login <img src="../../../assets/svg/springboot.svg" />
               </p>
+              <div class="alert alert-danger" role="alert">
+                login and register not avalible because when move to production
+                get error 403 and 417, when I hava a time, I will fix. 😢
+              </div>
               <form [formGroup]="loginFormGroup" (ngSubmit)="onSubmit()">
                 <div class="form-group mb-3">
                   <input
@@ -38,14 +42,7 @@
                     type="password"
                     placeholder="Password"
                     required=""
-                    class="
-                      form-control
-                      rounded-pill
-                      border-0
-                      shadow-sm
-                      px-4
-                      text-primary
-                    "
+                    class="form-control rounded-pill border-0 shadow-sm px-4 text-primary"
                   />
                 </div>
                 <!-- <div class="custom-control custom-checkbox mb-3">
@@ -62,13 +59,7 @@
                 <button
                   type="submit"
                   [disabled]="loginFormGroup.invalid"
-                  class="
-                    btn btn-primary btn-block
-                    text-uppercase
-                    mb-3
-                    rounded-pill
-                    shadow-sm
-                  "
+                  class="btn btn-primary btn-block text-uppercase mb-3 rounded-pill shadow-sm"
                 >
                   Sign in
                 </button>

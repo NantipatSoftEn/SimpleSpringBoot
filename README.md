@@ -18,8 +18,14 @@ design pattern: Clean Architecture Concept
 - maven install
 - connect db with pgadmin `docker inspect <container id> | grep "IPAddress"`
 
+อย่าเพิ่งทำ  container_name: backend ก่อนให้เอาอย่างอื่นขึ้นไปก่อนแล้วเพื่อตอน build จะได้มีการเชื่อมต่อ db แล้ว build test pass
 
-อย่าเพิ่งทำ  container_name: backend ก่อนให้เอาอย่างอื่นขึ้นไปก่อนแล้วเพื่อตอน build จะได้มีการเชื่อมต่อ db แล้ว build test pass  
+## Production 
+it have error 403 while activated email and error 417 when login 
+
+## Will do
+If I can skip test while build .jar I can write build in docker file with module common
+
 
 ## [Top Spring Annotation](https://medium.com/javarevisited/top-spring-annotations-4f691babe458)
 

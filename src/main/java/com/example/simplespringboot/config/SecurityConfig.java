@@ -13,7 +13,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 @EnableWebSecurity
 public class SecurityConfig  extends WebSecurityConfigurerAdapter {
@@ -50,6 +52,9 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
             cors.addAllowedMethod("PUT");
             cors.addAllowedMethod("DELETE");
             cors.addAllowedMethod("OPTIONS");
+            cors.setAllowedOrigins(List.of("*"));
+            cors.setAllowedMethods(Arrays.asList("*"));
+            cors.setAllowedHeaders(Arrays.asList("*"));
 
             UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
             source.registerCorsConfiguration("/**", cors);
